@@ -10,7 +10,7 @@ import java.util.*;
 class Path {
 
 	protected Cell[] cells;
-
+	
 	/**
 	 * Constructor that sets the cells and assigns the PathStart and PathEnd logic
 	 * to the first and the last cells of the path respectively if the path is

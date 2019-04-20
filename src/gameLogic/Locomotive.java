@@ -13,8 +13,12 @@ class Locomotive extends Car {
 	 * Constructor that calls the superclass Car's constructor which then sets the
 	 * given cell as the one that the locomotive is currently at.
 	 */
+	int gloIndex = 0;
+	int curIndex;
 	public Locomotive(Cell cell) {
 		super(cell);
+		curIndex = gloIndex;
+		gloIndex++;
 	}
 	
 	/**

@@ -43,7 +43,7 @@ class PassengerCar extends Car {
 	@Override
 	public boolean CurrentlyAtTheStation(Colors[] colors) {
 		if (full) {
-			for (Colors c : Colors.values()) {
+			for (Colors c : colors) {
 				if (c.toString().equals(this.color.toString())) {
 
 					full = false;

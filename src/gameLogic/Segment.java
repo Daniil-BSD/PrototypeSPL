@@ -93,6 +93,7 @@ abstract class Segment {
 			return path01.GetStart();
 		if (endID == 1)
 			return path10.GetStart();
+		System.out.println("Incorrect end(s)\n");
 		return null;
 	}
 

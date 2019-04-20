@@ -55,7 +55,9 @@ class Level {
 				return sg;
 			}
 		}
+		System.out.println("Incorrect segment(s)\n");
 		return null;
+		
 	}
 
 	/**
@@ -102,7 +104,15 @@ class Level {
 	 * called by a similarly named method of the LevelContainer class.
 	 */
 	public void addSegment(Segment sgm) {
+		for (Segment sg : segments) {
+			if (sg.AreYou(sgm.id)) {
+				System.out.println("A segment with the same identifier already exists.\n");
+				return;
+			}
+				
+			}
 		segments.add(sgm);
+		System.out.println("A new segment added");
 	}
 	
 	/**
