@@ -20,11 +20,11 @@ class TunnelEntrance extends Segment {
 		cells[1] = new Cell();
 		cells[2] = new Cell();
 		cells[3] = new Cell();
+		temp.add(cells[0]);
 		temp.add(cells[1]);
-		temp.add(cells[2]);
 		path01 = new Path(temp.toArray(new Cell[temp.size()]));
 		temp = new LinkedList<Cell>();
-		temp.add(cells[4]);
+		temp.add(cells[2]);
 		temp.add(cells[3]);
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		end0 = path10.GetEndLogic();
@@ -41,13 +41,13 @@ class TunnelEntrance extends Segment {
 	 */
 	public void Clear() {
 		tunnel = null;
+		path01.GetEndLogic().Connect(null);
 	}
 
 	/**
 	 * This method sets the tunnel of both entrances to null.
 	 */
 	public void FullClear() {
-		
 		if (tunnel != null)
 			tunnel.GetTheOtherEnd(this).Clear();
 		Clear();
@@ -58,6 +58,7 @@ class TunnelEntrance extends Segment {
 	 */
 	public void SetTunnel(Tunnel newTunnel) {
 		this.tunnel = newTunnel;
+		this.path01.GetEndLogic().Connect(tunnel.PathStartFor(this));
 	}
 
 	/**

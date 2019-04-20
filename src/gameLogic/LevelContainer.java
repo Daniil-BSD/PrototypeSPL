@@ -30,11 +30,6 @@ abstract class LevelContainer {
 	 * This attribute stores the tunnel entrance highlighted by the player.
 	 */
 	private static TunnelEntrance selected;
-
-	/**
-	 * This attribute stores the tunnel entrance highlighted by the player.
-	 */
-	private static Segment selSegment;
 	/**
 	 * This method gets the cars which are arrived at the final station. If the
 	 * train is empty, the train waits at the Final Station. If the train is not
@@ -85,16 +80,13 @@ abstract class LevelContainer {
 	 * tunnel between two points.
 	 */
 	public static boolean IsEntranceSelected() {
-	
 		return selected != null;
 	}
 
 	public static void Step(int index) {
-		for(Locomotive l : level.trains) {
-			if(index == l.curIndex)
-				System.out.println("Stepping the specified locomotive");
-				l.Step();
-			
+		if(level.trains.size() > index) {
+			System.out.println("Stepping the specified locomotive");
+			level.trains.get(index).Step();
 		}
 		System.out.println("Locomotive was not found");
 		
@@ -104,7 +96,6 @@ abstract class LevelContainer {
 	 * from the given entrance.
 	 */
 	public static boolean IsTunnelPossibleFrom(TunnelEntrance te) {
-
 		if (te == null || selected == null)
 			return false;
 		return level.IsTunnelPossibleBetween(te, selected);
@@ -117,6 +108,7 @@ abstract class LevelContainer {
 	 * the te and the selected entrance.
 	 */
 	public static void ConstructFrom(TunnelEntrance te) {
+		System.out.println("Tunnel Constructed");
 		te.FullClear();
 		selected.FullClear();
 		Tunnel newTunnel = LevelContainer.level.GetTunnelBetween(te, selected);
@@ -167,13 +159,6 @@ abstract class LevelContainer {
 	 */
 	public static void SelectEntrance(TunnelEntrance te) {
 		selected = te;
-
-	}
-	/**
-	 * This method selects a segment.
-	 */
-	public static void SelectSegment(Segment se) {
-		selSegment = se;
 
 	}
 	/**
@@ -287,27 +272,21 @@ abstract class LevelContainer {
 	}
 	
 	public static void printTypes() {
-		for(Segment s: level.segments) {
-			System.out.println(s.getClass().toString());
-			
-		}
+		for(Segment s: level.segments) 
+			System.out.println("\t" + s.getClass().getSimpleName());
 		
 	}
 	
-	public static void getSimpleNames() {
+	public static void printSimpleNames() {
 		for(Segment s: level.segments) 
-			System.out.println("\"" + s.id + "\"");
+			System.out.println("\t\"" + s.id + "\"");
 	}
 	
 	public static void printSegments() {
-		for(Segment s: level.segments) {
-
-			System.out.println( s.getClass().toString() + "\"" + s.id + "\"");
-
+		for(Segment s: level.segments) 
+			System.out.println("\t" + s.getClass().getSimpleName() + " \"" + s.id + "\"");
+	}
 		
-		}
-		
-}
 	
 	public static void printTrains() {
 		for(Locomotive l: level.trains) {

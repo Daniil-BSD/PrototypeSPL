@@ -127,9 +127,7 @@ abstract class Segment {
 	 * This method is needed to store the segment which was selected by the player
 	 * to construct a tunnel, or to control a switch at the chosen fork.
 	 */
-	public void Select() {
-		LevelContainer.SelectSegment(this);
-	}
+	public void Select() {}
 
 	/**
 	 * This method gets the path that ends with the cell identified by the given integer id.

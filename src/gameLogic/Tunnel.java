@@ -15,8 +15,8 @@ class Tunnel extends Segment {
 		super();
 		cells = new Cell[4 + length];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
-		cells[7] = new Cell();
-		cells[8] = new Cell();
+		cells[length + 2] = new Cell();
+		cells[length + 3] = new Cell();
 		for (int i = 0; i < length + 2; i++) {
 			cells[i] = new Cell();
 			temp.add(cells[i]);

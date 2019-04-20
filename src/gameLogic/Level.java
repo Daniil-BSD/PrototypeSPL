@@ -109,8 +109,7 @@ class Level {
 				System.out.println("A segment with the same identifier already exists.\n");
 				return;
 			}
-				
-			}
+		}
 		segments.add(sgm);
 		System.out.println("A new segment added");
 	}
