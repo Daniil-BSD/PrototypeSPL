@@ -16,7 +16,7 @@ public abstract class ConsoleInterpreter {
 	 * content.
 	 */
 	public static void ConsoleLine(String input) throws Exception {
-		System.out.println(">>ConsoleLine(string input): interprets the user string input");
+		System.out.println(">>ConsoleLine(string input): interprets the uuser string input");
 
 		String[] command = input.split(" ");
 		if (command.length > 0) {
