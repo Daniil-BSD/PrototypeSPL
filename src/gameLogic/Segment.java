@@ -18,7 +18,7 @@ abstract class Segment {
 	 * Default constructor
 	 */
 	protected Segment() {
-		this.id = "12341";
+		this.id = this.getClass().getSimpleName() + System.identityHashCode(this);
 	}
 
 	/**

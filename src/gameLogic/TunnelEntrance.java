@@ -14,6 +14,21 @@ class TunnelEntrance extends Segment {
 	 */
 	public TunnelEntrance(String id) {
 		super(id);
+		cells = new Cell[4];
+		LinkedList<Cell> temp = new LinkedList<Cell>();
+		cells[0] = new Cell();
+		cells[1] = new Cell();
+		cells[2] = new Cell();
+		cells[3] = new Cell();
+		temp.add(cells[1]);
+		temp.add(cells[2]);
+		path01 = new Path(temp.toArray(new Cell[temp.size()]));
+		temp = new LinkedList<Cell>();
+		temp.add(cells[4]);
+		temp.add(cells[3]);
+		path10 = new Path(temp.toArray(new Cell[temp.size()]));
+		end0 = path10.GetEndLogic();
+		end1 = path01.GetEndLogic();
 	}
 
 	/**
@@ -49,6 +64,7 @@ class TunnelEntrance extends Segment {
 	 * This method selects the current entrance.
 	 */
 
+	@Override
 	public void Select() {
 		if (LevelContainer.IsEntranceSelected()) {
 			if (LevelContainer.IsTunnelPossibleFrom(this)) {
@@ -63,9 +79,29 @@ class TunnelEntrance extends Segment {
 		}
 
 	}
+
+	@Override
+	public boolean IsEndFree(int endID) {
+		if (endID == 0)
+			return !end0.HasConnection();
+		return false;
+	}
 	
+	@Override
+	public Path GetPathEndingWith(int endID) {
+		if (endID == 0)
+			return path01;
+		return null;
+
+	}
+	
+	public Path GetTunnelExitPath() {
+		return path10;
+	}
+
+	@Override
 	public void printFull() {
-		System.out.println("Fork \"" + id + "\"");
+		System.out.println("Tunnel Entrance \"" + id + "\"");
 		System.out.println("\t path01");
 		path01.print();
 		System.out.println("\t path10");

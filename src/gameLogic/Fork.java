@@ -114,6 +114,55 @@ class Fork extends Segment {
 		}
 	}
 
+	/**
+	 * This method returns a cell that is an edge of the segment if this cell is
+	 * free.
+	 */
+	public Cell GetFreeEnd(int endID) {
+		if (!IsEndFree(endID))
+			return null;
+		if (endID == 0)
+			return selectorPath.GetStart();
+		if (endID == 1)
+			return path10.GetStart();
+		if (endID == 2)
+			return path20.GetStart();
+		System.out.println("Incorrect end(s)\n");
+		return null;
+	}
+
+	/**
+	 * This method returns true if the edge of the segment that is identified by the
+	 * integer parameter is free.
+	 * 
+	 */
+
+	public boolean IsEndFree(int endID) {
+		if (endID == 0)
+			return !end0.HasConnection();
+		if (endID == 1)
+			return !end1.HasConnection();
+		if (endID == 2)
+			return !end2.HasConnection();
+		return false;
+	}
+
+	/**
+	 *
+	 * This method connects the segments by its ends, one of which is passed on as a
+	 * parameter to this method.
+	 */
+	public void ConnectTo(int endID, Cell end) {
+		if (!IsEndFree(endID))
+			return;
+		if (endID == 0)
+			end0.Connect(end);
+		if (endID == 1)
+			end1.Connect(end);
+		if (endID == 2)
+			end2.Connect(end);
+	}
+
 	// Method purely for skeleton
 	/**
 	 * 
