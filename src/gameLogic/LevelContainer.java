@@ -1,6 +1,11 @@
 package gameLogic;
 
 import java.io.Console;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 /**
@@ -208,7 +213,43 @@ abstract class LevelContainer {
 	 * This method is loads the level to the level container.
 	 */
 	public static void Load(String name) {
-		// no current implementation
+		try
+		{
+			FileInputStream fileIn = new FileInputStream("C:\\"+name+".lvl");
+	        ObjectInputStream in = new ObjectInputStream(fileIn);
+	        level = (Level) in.readObject();
+	        in.close();
+	        fileIn.close();
+	        }
+		catch(IOException i)
+		{
+			i.printStackTrace();
+	        return;
+	        }
+		catch(ClassNotFoundException c)
+		{
+			System.out.println("Level class not found");
+	        c.printStackTrace();
+	        return;
+	        }
+	}
+	/**
+	 * This method is saves the level to the file.
+	 */
+	public static void Save(String name) {
+	      try
+	      {
+	         FileOutputStream fileOut =
+	         new FileOutputStream("C:\\"+name+".lvl");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(level);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in C:\\"+name+".lvl");
+	      }catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      }
 	}
 
 	public static void Load(Level level) {
