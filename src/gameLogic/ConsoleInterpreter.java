@@ -63,7 +63,7 @@ public abstract class ConsoleInterpreter {
 						}
 					}
 				}
-					if (newSegment != null) {
+				else if (newSegment != null) {
 						LevelContainer.addSegment(newSegment);
 					}
 					
@@ -81,9 +81,11 @@ public abstract class ConsoleInterpreter {
 			}
 
 			if (command[0].equals("join") &&  command.length == 5) {
+				System.out.println("The join command was processed");
 				try {
 					LevelContainer.Join(command[1], Integer.parseInt(command[2]), command[3],
 							Integer.parseInt(command[4]));
+					
 				} catch (NumberFormatException e) {
 					System.out.println("Incorrect input");
 				}
@@ -172,7 +174,7 @@ public abstract class ConsoleInterpreter {
 				}
 				if(command[1].equals("sNames")){
 					System.out.println("Printing the names of the segments");
-					LevelContainer.printNames();
+					LevelContainer.getSimpleNames();
 					
 				}
 				if(command[1].equals("sFull")){
@@ -194,6 +196,7 @@ public abstract class ConsoleInterpreter {
 					LevelContainer.getAll();
 					
 				}
+				
 			}
 			
 			
@@ -224,6 +227,7 @@ public abstract class ConsoleInterpreter {
 				System.out.println("Quitting...");
 				Main.run = false;
 			}else {
+				
 				System.out.println("Input the command:");
 			}
 		}

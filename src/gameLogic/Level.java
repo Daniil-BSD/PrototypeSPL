@@ -55,7 +55,7 @@ class Level {
 				return sg;
 			}
 		}
-		System.out.println("Incorrect segment(s)\n");
+		//System.out.println("Incorrect segment(s)\n");
 		return null;
 		
 	}

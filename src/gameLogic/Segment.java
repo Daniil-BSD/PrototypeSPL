@@ -145,5 +145,5 @@ abstract class Segment {
 	}
 
 	public abstract void printFull();
-
+	
 }

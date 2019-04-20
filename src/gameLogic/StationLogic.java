@@ -31,7 +31,7 @@ class StationLogic implements CellLogic {
      */
     @Override
     public boolean LogicRequest(Car car) {
-		Colors colors[] = parentStation.GetColors();
+		Colors colors[] = parentStation.getColors();
 		if(car.CurrentlyAtTheStation_Locomotive(colors)) {
 			return false;
 		}else {

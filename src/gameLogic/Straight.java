@@ -70,4 +70,5 @@ class Straight extends Segment {
 		path10.print();
 	}
 
+	
 }

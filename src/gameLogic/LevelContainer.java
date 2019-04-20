@@ -62,8 +62,11 @@ abstract class LevelContainer {
 				segment1.ConnectTo(end1ID, end2);
 				segment2.ConnectTo(end2ID, end1);
 			} else {
+				System.out.println("Incorrect end(s)");
+				return;
 			}
 		} else {
+			System.out.println("Incorrect segment(s)");
 		}
 
 	}
@@ -291,14 +294,16 @@ abstract class LevelContainer {
 		
 	}
 	
-	public static void printNames() {
+	public static void getSimpleNames() {
 		for(Segment s: level.segments) 
 			System.out.println("\"" + s.id + "\"");
 	}
 	
 	public static void printSegments() {
 		for(Segment s: level.segments) {
+
 			System.out.println( s.getClass().toString() + "\"" + s.id + "\"");
+
 		
 		}
 		
@@ -319,10 +324,18 @@ abstract class LevelContainer {
 		
 	}
 	public static void printFull() {
+		if(level.segments.size() == 0) {
+			System.out.println("No data");
+			return;
+		}
 		for(Segment s: level.segments) {
+
 			s.printFull();
 		}
+		
 	}
+	
+	
 }
 class GameTick extends Thread {
 	public volatile boolean run = false;
