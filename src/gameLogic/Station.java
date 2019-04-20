@@ -93,5 +93,12 @@ class Station extends Segment {
 	public Path GET_DEMO_PATHL() {
 		return path01;
 	}
-
+	
+	public void printFull() {
+		System.out.println("Station \"" + id + "\"");
+		System.out.println("\t path01");
+		path01.print();
+		System.out.println("\t path10");
+		path10.print();
+	}
 }

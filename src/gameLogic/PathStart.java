@@ -28,5 +28,10 @@ class PathStart implements CellLogic {
     	car.SetPath(path);
     	return true;
     }
+    
+    @Override
+    public String toString() {
+    	return "PathStart";
+    }
 
 }

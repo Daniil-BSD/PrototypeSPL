@@ -26,31 +26,28 @@ class StationLogic implements CellLogic {
     	this.parentStation = parentStation;
     }
 
-   
-
     /**
      * This method executes the corresponding logic.
      */
     @Override
     public boolean LogicRequest(Car car) {
-    	if(car.IsLocomotive()) {
-    		Colors colors[] = parentStation.GetColors();
-    		if(car.CurrentlyAtTheStation(colors)) {
-    			return false;
-    		}else {
-    			if(parentStation.IsFinal()) {
-    				if(!finalReportFlag) {
-    					finalReportFlag = true;
-    					LevelContainer.FinalReport(car);
-    				}
-    				return false;
-    			}
-    			return true;
-    		}
-    		
-    	}
-    	return true;
+		Colors colors[] = parentStation.GetColors();
+		if(car.CurrentlyAtTheStation_Locomotive(colors)) {
+			return false;
+		}else {
+			if(parentStation.IsFinal()) {
+				if(!finalReportFlag) {
+					finalReportFlag = true;
+					LevelContainer.FinalReport(car);
+				}
+				return false;
+			}
+			return true;
+		}
     }
-
-
+    
+    @Override
+    public String toString() {
+    	return "StationLogic";
+    }
 }

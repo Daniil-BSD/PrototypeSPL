@@ -14,5 +14,8 @@ interface CellLogic {
 	 * train can leave the current cell and advance to the next cell along the path.
 	 */
 	public boolean LogicRequest(Car car);
+	
+	@Override
+	public String toString();
 
 }

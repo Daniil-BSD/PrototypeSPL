@@ -41,7 +41,7 @@ class PassengerCar extends Car {
 	 * which switches on to the next attached car.
 	 */
 	@Override
-	public boolean CurrentlyAtTheStation(Colors[] colors) {
+	public boolean CurrentlyAtTheStation_Universal(Colors[] colors) {
 		if (full) {
 			for (Colors c : colors) {
 				if (c.toString().equals(this.color.toString())) {
@@ -52,7 +52,7 @@ class PassengerCar extends Car {
 			}
 			return false;
 		} else {
-			return super.CurrentlyAtTheStation(colors);
+			return super.CurrentlyAtTheStation_Universal(colors);
 		}
 	}
 }

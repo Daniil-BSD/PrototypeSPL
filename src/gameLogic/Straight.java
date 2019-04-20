@@ -16,19 +16,19 @@ class Straight extends Segment {
 		super(id);
 		cells = new Cell[9];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
-		cells[0] = new Cell();
+		cells[7] = new Cell();
 		cells[8] = new Cell();
-		for (int i = 1; i < 7; i++) {
+		for (int i = 0; i < 7; i++) {
 			cells[i] = new Cell();
 			temp.add(cells[i]);
 		}
 		path01 = new Path(temp.toArray(new Cell[temp.size()]));
 		temp = new LinkedList<Cell>();
-		for (int i = 8; i >= 0; i--) {
-			if (i == 7 || i == 1 )
-				i--;
+		temp.add(cells[7]);
+		for (int i = 5; i > 0; i--) {
 			temp.add(cells[i]);
 		}
+		temp.add(cells[8]);
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		end0 = path10.GetEndLogic();
 		end1 = path01.GetEndLogic();
@@ -60,6 +60,14 @@ class Straight extends Segment {
 		if (index == 1)
 			return path01;
 		return path10;
+	}
+	
+	public void printFull() {
+		System.out.println("Straight \"" + id + "\"");
+		System.out.println("\t path01");
+		path01.print();
+		System.out.println("\t path10");
+		path10.print();
 	}
 
 }

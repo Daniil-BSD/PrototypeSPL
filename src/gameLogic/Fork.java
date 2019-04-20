@@ -2,6 +2,8 @@ package gameLogic;
 
 import java.util.*;
 
+import javax.sql.rowset.Joinable;
+
 /**
  * This class is responsible for directing the train along the different paths
  * that go out of the fork depending on the player¡¦s choice.
@@ -22,26 +24,25 @@ class Fork extends Segment {
 	public Fork(String id) {
 		super(id);
 		cells = new Cell[17];
-		int i = 0;
 		LinkedList<Cell> temp = new LinkedList<Cell>();
 		LinkedList<Cell> temp2 = new LinkedList<Cell>();
-		for (; i < 2; i++) {
+		for (int i = 0; i < 17; i++) {
 			cells[i] = new Cell();
+		}
+		int i = 0;
+		for (; i < 2; i++) {
 			temp.add(cells[i]);
 		}
 		for (; i < 4; i++) {
-			cells[i] = new Cell();
 			temp2.add(cells[i]);
 		}
 		selectorPath = new SelectorPath(temp.toArray(new Cell[temp.size()]), temp2.toArray(new Cell[temp2.size()]));
 		temp = new LinkedList<Cell>();
 		temp2 = new LinkedList<Cell>();
 		for (; i < 7; i++) {
-			cells[i] = new Cell();
 			temp.add(cells[i]);
 		}
 		for (; i < 10; i++) {
-			cells[i] = new Cell();
 			temp2.add(cells[i]);
 		}
 		path01 = new Path(temp.toArray(new Cell[temp.size()]));
@@ -50,13 +51,23 @@ class Fork extends Segment {
 		selectorPath.GetEndLogicByIndex(1).Connect(path02.GetStart());
 		end1 = path01.GetEndLogic();
 		end2 = path02.GetEndLogic();
-		path20 = path02;
-		path10 = path01;
-		for (; i < 17; i++) {
-			cells[i] = new Cell();
-		}
-		// paths 20 and 02 are left out as they are not important for the planned
-		// demonstrations.
+		temp = new LinkedList<Cell>();
+		temp2 = new LinkedList<Cell>();
+		temp.add(cells[10]);
+		temp.add(cells[5]);
+		temp.add(cells[11]);
+		temp.add(cells[12]);
+		temp.add(cells[1]);
+		temp.add(cells[16]);
+		temp2.add(cells[13]);
+		temp2.add(cells[8]);
+		temp2.add(cells[14]);
+		temp2.add(cells[15]);
+		temp2.add(cells[1]);
+		temp2.add(cells[16]);
+		path10 = new Path(temp.toArray(new Cell[temp.size()]));
+		path20 = new Path(temp2.toArray(new Cell[temp2.size()]));
+		end0 = path10.GetEndLogic();
 
 	}
 
@@ -117,6 +128,20 @@ class Fork extends Segment {
 		if (index == 2)
 			return cells[8];
 		return cells[0];
+	}
+
+	public void printFull() {
+		System.out.println("Fork \"" + id + "\"");
+		System.out.println("\t path01");
+		path01.print();
+		System.out.println("\t path10");
+		path10.print();
+		System.out.println("\t selectorPath");
+		selectorPath.print();
+		System.out.println("\t path02");
+		path02.print();
+		System.out.println("\t path20");
+		path20.print();
 	}
 
 }
