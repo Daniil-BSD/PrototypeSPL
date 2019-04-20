@@ -1,6 +1,11 @@
 package gameLogic;
 
 import java.io.Console;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 /**
@@ -57,8 +62,11 @@ abstract class LevelContainer {
 				segment1.ConnectTo(end1ID, end2);
 				segment2.ConnectTo(end2ID, end1);
 			} else {
+				System.out.println("Incorrect end(s)");
+				return;
 			}
 		} else {
+			System.out.println("Incorrect segment(s)");
 		}
 
 	}
@@ -218,7 +226,43 @@ abstract class LevelContainer {
 	 * This method is loads the level to the level container.
 	 */
 	public static void Load(String name) {
-		// no current implementation
+		try
+		{
+			FileInputStream fileIn = new FileInputStream("C:\\"+name+".lvl");
+	        ObjectInputStream in = new ObjectInputStream(fileIn);
+	        level = (Level) in.readObject();
+	        in.close();
+	        fileIn.close();
+	        }
+		catch(IOException i)
+		{
+			i.printStackTrace();
+	        return;
+	        }
+		catch(ClassNotFoundException c)
+		{
+			System.out.println("Level class not found");
+	        c.printStackTrace();
+	        return;
+	        }
+	}
+	/**
+	 * This method is saves the level to the file.
+	 */
+	public static void Save(String name) {
+	      try
+	      {
+	         FileOutputStream fileOut =
+	         new FileOutputStream("C:\\"+name+".lvl");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(level);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in C:\\"+name+".lvl");
+	      }catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      }
 	}
 
 	public static void Load(Level level) {
@@ -242,11 +286,7 @@ abstract class LevelContainer {
 		level.Tick();
 	}
 	
-	public static void getTypes() {
-		if(level.segments == null) {
-			System.out.println("No data");
-		return;
-		}
+	public static void printTypes() {
 		for(Segment s: level.segments) {
 			System.out.println(s.getClass().toString());
 			
@@ -254,66 +294,48 @@ abstract class LevelContainer {
 		
 	}
 	
-	public static void getNames() {
-		if(level.segments == null) {
-			System.out.println("No data");
-			return;
-		}
-		for(Segment s: level.segments) {
-			System.out.println(s.id + "\n");
-		
+	public static void getSimpleNames() {
+		for(Segment s: level.segments) 
+			System.out.println("\"" + s.id + "\"");
 	}
 	
-	}
-	
-	public static void getSegments() {
-		if(level.segments == null) {
-			System.out.println("No data");
-			return;
-		}
+	public static void printSegments() {
 		for(Segment s: level.segments) {
-			System.out.println(s.getClass().toString() + " " + s.id);
+
+			System.out.println( s.getClass().toString() + "\"" + s.id + "\"");
+
 		
 		}
 		
 }
 	
-	public static void getTrains() {
-		if(level.trains == null) {
-			System.out.println("No data");
-			return;
-		}
+	public static void printTrains() {
 		for(Locomotive l: level.trains) {
 			System.out.println("train " + l.curIndex);
 			
 		}
-		
 	}
 	
 	public static void getAll() {
 		System.out.println("Printing the segment types, their identifiers and the paths with cells belonging to them.");
-		getFull();
+		printFull();
 		System.out.println("Printing trains");
-		getTrains();
+		printTrains();
 		
 	}
-	public static void getFull() {
-		if(level.segments == null) {
+	public static void printFull() {
+		if(level.segments.size() == 0) {
 			System.out.println("No data");
 			return;
 		}
 		for(Segment s: level.segments) {
-			System.out.println(s.getClass().toString() + " " + s.id);
-				System.out.println("   path01" );
-					System.out.println("      cell01");
-					System.out.println("      cell02");
-					System.out.println("      cell03");
-				System.out.println("   path02" );
-					System.out.println("      cell01");
-					System.out.println("      cell02");
-					System.out.println("      cell03");
+
+			s.printFull();
+		}
+		
 	}
-}
+	
+	
 }
 class GameTick extends Thread {
 	public volatile boolean run = false;

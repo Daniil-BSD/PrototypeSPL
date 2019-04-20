@@ -107,4 +107,10 @@ class Path {
 		}
 	}
 
+	public void print() {
+		for (Cell cell : cells) {
+			System.out.println("\t\t" + cell.toString());
+		}
+	}
+
 }

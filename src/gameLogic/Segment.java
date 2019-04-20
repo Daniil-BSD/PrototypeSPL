@@ -60,7 +60,7 @@ abstract class Segment {
 	 * identifier. It is needed in order to build the level by connecting segments.
 	 */
 
-	protected final String id;
+	public final String id;
 
 	/**
 	 * This method compares the given string id with the segments string id and
@@ -115,7 +115,6 @@ abstract class Segment {
 	 * parameter to this method.
 	 */
 	public void ConnectTo(int endID, Cell end) {
-		System.out.println(">>ConnectTo(Cell pathStart, int endID): assignes cell to the specified PathEnd.");
 		if (!IsEndFree(endID))
 			return;
 		if (endID == 0)
@@ -136,8 +135,6 @@ abstract class Segment {
 	 * This method gets the path that ends with the cell identified by the given integer id.
 	 */
 	public Path GetPathEndingWith(int endID) {
-		System.out.println("\t>GetPathEndingWith(int endid): getter for a path based on the exit “endid”.");
-		System.out.println("\t<GetPathEndingWith(int endid): path that ends with indecated end.");
 
 		if (endID == 0)
 			return path01;
@@ -147,4 +144,6 @@ abstract class Segment {
 
 	}
 
+	public abstract void printFull();
+	
 }

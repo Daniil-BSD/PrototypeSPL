@@ -18,7 +18,7 @@ class SelectorPath extends Path {
 		this.exits = exits;
 		if (this.cells.length > 0 && this.exits.length > 0) {
 			this.cells[0].SetLogic(new PathStart(this));
-			for (Cell cell : exits) {
+			for (Cell cell : this.exits) {
 				cell.SetLogic(new PathEnd());
 			}
 		} else {
@@ -96,6 +96,16 @@ class SelectorPath extends Path {
 	@Override
 	public PathEnd GetEndLogic() {
 		return (PathEnd) exits[selectedIndex].GetLogic();
+	}
+	
+	@Override
+	public void print() {
+		super.print();
+		System.out.println("\t\t<Ends>");
+		for (Cell cell : exits) {
+			System.out.println("\t\t" + cell.toString());
+		}
+		System.out.println("\t\t</Ends>");
 	}
 
 }

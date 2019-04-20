@@ -61,5 +61,11 @@ class Cell {
 	public void setOccupied(Boolean occupied) {
 		this.occupied = occupied;
 	}
+	
+	@Override
+	public String toString() {
+		return "Cell [" + System.identityHashCode(this) + "]: occupied = " + occupied +" ; logic: " + 
+		((logic != null)? logic.toString(): "(none)");
+	}
 
 }

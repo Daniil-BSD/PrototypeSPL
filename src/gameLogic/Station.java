@@ -64,9 +64,9 @@ class Station extends Segment {
 	 * 
 	 * @return
 	 */
-	public Colors[] GetColors() {
-		// TODO implement here
+	public Colors[] getColors() {
 		return colors;
+		
 	}
 
 	// Method purely for skeleton
@@ -93,5 +93,16 @@ class Station extends Segment {
 	public Path GET_DEMO_PATHL() {
 		return path01;
 	}
-
+	
+	public void printFull() {
+		System.out.println("Station \"" + id + "\"");
+		System.out.println("Colors: ");
+		for(int i = 0; i< colors.length; i++) {
+			System.out.println(colors[i].name());
+		}
+		System.out.println("\t path01");
+		path01.print();
+		System.out.println("\t path10");
+		path10.print();
+	}
 }

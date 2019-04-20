@@ -25,9 +25,11 @@ class Locomotive extends Car {
 	 * This method checks if this car is a locomotive. Always returns true.
 	 */
 	@Override
-	public boolean IsLocomotive() {
-	
-		return true;
-	}
+	public boolean CurrentlyAtTheStation_Locomotive(Colors[] colors) {
+		if (attachedCar != null) {
+			return attachedCar.CurrentlyAtTheStation_Universal(colors);
+		}
+		return false;
+	};
 
 }

@@ -29,8 +29,9 @@ public class Main {
 		run = true;
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
-		System.out.println("Input thecommands:");
-		
+
+		System.out.println("Input the command:");
+		ConsoleInterpreter.Prepare();
 		while (run) {
 			try {
 				ConsoleInterpreter.ConsoleLine( br.readLine());

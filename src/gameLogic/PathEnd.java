@@ -44,6 +44,10 @@ class PathEnd implements CellLogic {
      */
     public void Connect(Cell end) {
     	nextCell = end;
-    	
+    }
+    
+    @Override
+    public String toString() {
+    	return "PathEnd; connection: " + HasConnection();
     }
 }

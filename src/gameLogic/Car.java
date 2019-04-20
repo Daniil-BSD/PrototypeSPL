@@ -43,7 +43,7 @@ abstract class Car {
 	 * train is moved by a locomotive which is a car, so cars should be connected
 	 * with each other for this to work.
 	 */
-	private Car attachedCar;
+	protected Car attachedCar;
 
 	/**
 	 * This attribute is here because of the cell logic. This is needed for the
@@ -112,28 +112,20 @@ abstract class Car {
 	}
 
 	/**
-	 * This method returns true if the this car is the locomotive, false is returned
-	 * if not.
-	 */
-	public boolean IsLocomotive() {
-		return false;
-
-	}
-
-	/**
 	 * When the locomotive is at the station, this method gets the colors of the
 	 * train, checks if any of them match with the station¡¦s colors. If they do, it
 	 * then drops the passengers.
 	 */
-	public boolean CurrentlyAtTheStation(Colors[] colors) {
-		
+	public boolean CurrentlyAtTheStation_Universal(Colors[] colors) {
 		if (attachedCar != null) {
-			
-			return attachedCar.CurrentlyAtTheStation(colors);
+			return attachedCar.CurrentlyAtTheStation_Universal(colors);
 		}
-		
 		return false;
 	}
+	
+	public boolean CurrentlyAtTheStation_Locomotive(Colors[] colors) {
+		return false;
+	};
 
 	/**
 	 * This method checks if the train has passengers or not. Returns true or false

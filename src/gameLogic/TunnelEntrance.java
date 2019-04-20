@@ -63,4 +63,14 @@ class TunnelEntrance extends Segment {
 		}
 
 	}
+	
+	public void printFull() {
+		System.out.println("Fork \"" + id + "\"");
+		System.out.println("\t path01");
+		path01.print();
+		System.out.println("\t path10");
+		path10.print();
+	}
+
+	
 }
