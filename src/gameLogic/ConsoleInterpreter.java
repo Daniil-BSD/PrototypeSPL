@@ -63,7 +63,7 @@ public abstract class ConsoleInterpreter {
 						}
 					}
 				}
-					if (newSegment != null) {
+				else if (newSegment != null) {
 						LevelContainer.addSegment(newSegment);
 					}
 					

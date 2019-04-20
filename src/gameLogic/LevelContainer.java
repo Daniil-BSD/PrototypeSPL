@@ -248,7 +248,7 @@ abstract class LevelContainer {
 		return;
 		}
 		for(Segment s: level.segments) {
-			System.out.println(s.getClass().toString() + "\n");
+			System.out.println(s.getClass().toString());
 			
 		}
 		
@@ -272,7 +272,7 @@ abstract class LevelContainer {
 			return;
 		}
 		for(Segment s: level.segments) {
-			System.out.println(s.getClass().toString() + " " + s.id + "\n");
+			System.out.println(s.getClass().toString() + " " + s.id);
 		
 		}
 		
@@ -303,7 +303,7 @@ abstract class LevelContainer {
 			return;
 		}
 		for(Segment s: level.segments) {
-			System.out.println(s.getClass().toString() + " " + s.id + "\n");
+			System.out.println(s.getClass().toString() + " " + s.id);
 				System.out.println("   path01" );
 					System.out.println("      cell01");
 					System.out.println("      cell02");

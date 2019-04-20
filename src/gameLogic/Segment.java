@@ -68,8 +68,6 @@ abstract class Segment {
 	 * 
 	 */
 	public boolean AreYou(String segmentID) {
-		System.out.println("\t>GetID(): Getter for Id parameter.");
-		System.out.println("\t<GetID(): ID of the segment as a string");
 		return id.equals(segmentID);
 	}
 

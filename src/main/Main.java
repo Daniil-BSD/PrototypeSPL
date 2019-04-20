@@ -30,6 +30,7 @@ public class Main {
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		System.out.println("Input thecommands:");
+		
 		while (run) {
 			try {
 				ConsoleInterpreter.ConsoleLine( br.readLine());
