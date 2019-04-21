@@ -22,28 +22,39 @@ class Station extends Segment {
 	public Station(String id, Colors[] colors) {
 		super(id);
 		this.colors = colors;
-		cells = new Cell[17];
+		cells = new Cell[18];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
-		cells[0] = new Cell();
-		cells[13] = new Cell();
-		cells[16] = new Cell();
-		for (int i = 1; i < 16; i++) {
-			if (i == 13)
-				i++;
+		for (int i = 1; i < 18; i++) {
 			cells[i] = new Cell();
+		}
+		for (int i = 0; i < 14; i++) {
 			temp.add(cells[i]);
 		}
 		path01 = new Path(temp.toArray(new Cell[temp.size()]));
 		temp = new LinkedList<Cell>();
-		for (int i = 16; i >= 0; i--) {
-			if (i == 15 || i == 12 || i == 1)
-				i--;
-			temp.add(cells[i]);
+		for (int i = 13; i >= 0; i--) {
+			switch(i){
+			case 13: 
+				temp.add(cells[14]);
+				break;
+			case 11: 
+				temp.add(cells[15]);
+				break;
+			case 2: 
+				temp.add(cells[16]);
+				break;
+			case 0: 
+				temp.add(cells[17]);
+				break;
+			default:
+				temp.add(cells[i]);
+			}
 		}
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		end0 = path10.GetEndLogic();
 		end1 = path01.GetEndLogic();
-		cells[12].SetLogic(new StationLogic(this));
+		cells[11].SetLogic(new StationLogic(this));
+		cells[16].SetLogic(new StationLogic(this));
 	}
 
 	/**
