@@ -123,13 +123,16 @@ public abstract class ConsoleInterpreter {
 					System.out.println("Incorrect input");
 				}
 			}
-			if (command[0].equals("start")) {
-
-				System.out.println("//starting the game");
+			if (command[0].equals("start") && command.length == 1 ) {
+				System.out.println("Starting the game");
 				LevelContainer.Start();
-
 			}
-			if (command[0].equals("stop")) {
+
+			if (command[0].equals("start") && command.length == 2 && command[1].equals("stop") ) {
+				System.out.println("Starting the game and pauses it");
+				LevelContainer.StartWithoutClock();
+			}
+			if (command[0].equals("stop") && command.length == 1) {
 
 				System.out.println("//stopping the game");
 				LevelContainer.Stop();
@@ -148,15 +151,31 @@ public abstract class ConsoleInterpreter {
 			if (command[0].equals("save") && command.length > 1) {
 				System.out.println("Saving...");
 				LevelContainer.Save(command[1]);
-
 			}
-			if (command[0].equals("pause") && command.length > 1) {
+			if (command[0].equals("pause") && command.length == 1) {
 				System.out.println("Pausing");
-
+				LevelContainer.Pause();
 			}
-			if (command[0].equals("resume") && command.length > 1) {
+			if (command[0].equals("resume") && command.length == 1) {
 				System.out.println("Resuming");
-
+				LevelContainer.Resume();
+			}
+			if (command[0].equals("tick") && command.length == 1) {
+				System.out.println("Tick");
+				LevelContainer.Tick();
+			}
+			if (command[0].equals("tick") && command.length > 1) {
+				try {
+					if(Integer.parseInt(command[1]) > 0) {
+						int n = Integer.parseInt(command[1]);
+						System.out.println("Tick x" + n);
+						for(int i = 0; i < n; i++) {
+							LevelContainer.Tick();
+						}
+				}
+				}catch(NumberFormatException exception ) {
+					
+				}
 			}
 			if (command[0].equals("step") && command.length > 1) {
 				System.out.println("The step command was processed");
@@ -196,7 +215,7 @@ public abstract class ConsoleInterpreter {
 
 				}
 				if (command[1].equals("all")) {
-					LevelContainer.getAll();
+					LevelContainer.printAll();
 
 				}
 

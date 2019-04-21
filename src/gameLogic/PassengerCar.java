@@ -55,4 +55,12 @@ class PassengerCar extends Car {
 			return super.CurrentlyAtTheStation_Universal(colors);
 		}
 	}
+	
+	@Override
+	public void CustomPrint (int tabs, int index) {
+		String string = "\t";
+		for(int i = 0; i < 0; i++) string += "/t";
+		System.out.println(string + "/tColor: " + color.toString());
+		System.out.println(string + "/tFull: " + full);
+	}
 }

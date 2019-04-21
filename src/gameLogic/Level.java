@@ -1,12 +1,21 @@
 package gameLogic;
 
+import java.io.Serializable;
 import java.util.*;
+
+import javax.xml.stream.events.StartDocument;
 
 /**
  * This class manages the levels of the game which store cars, segments and
  * cells within them.
  */
-class Level {
+
+class Level implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4521202955123700825L;
 
 	/**
 	 * Default constructor
@@ -15,12 +24,15 @@ class Level {
 		trains = new ArrayList<Locomotive>();
 		segments = new ArrayList<Segment>();
 		tunnels = new ArrayList<Tunnel>();
+		gameActive = false;
 	}
 
 	/**
 	 * This attribute stores the trains of the level.
 	 */
 	protected ArrayList<Locomotive> trains;
+	protected ArrayList<Locomotive> activeTrains;
+	protected boolean gameActive;
 
 	/**
 	 * Segments of the level are stored by this attribute
@@ -35,12 +47,19 @@ class Level {
 	/**
 	 * System clock is implemented by this method.
 	 */
-
+	
+	@SuppressWarnings("unchecked")
+	public void Run () {
+		activeTrains = (ArrayList<Locomotive>) trains.clone();
+		gameActive = true;
+	}
 	
 
 	public void Tick() {
-		for (Locomotive locomotive : trains) {
-			locomotive.Step();
+		if(gameActive) {
+			for (Locomotive locomotive : activeTrains) {
+				locomotive.Step();
+			}
 		}
 	}
 

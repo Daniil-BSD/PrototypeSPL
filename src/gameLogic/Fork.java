@@ -181,15 +181,12 @@ class Fork extends Segment {
 
 	public void printFull() {
 		System.out.println("Fork \"" + id + "\"");
-		System.out.println("\t path01");
-		path01.print();
-		System.out.println("\t path10");
-		path10.print();
-		System.out.println("\t selectorPath");
+		super.printFull();
+		System.out.print("\t selectorPath");
 		selectorPath.print();
-		System.out.println("\t path02");
+		System.out.print("\t path02");
 		path02.print();
-		System.out.println("\t path20");
+		System.out.print("\t path20");
 		path20.print();
 	}
 

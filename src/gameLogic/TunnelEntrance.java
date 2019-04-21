@@ -103,10 +103,7 @@ class TunnelEntrance extends Segment {
 	@Override
 	public void printFull() {
 		System.out.println("Tunnel Entrance \"" + id + "\"");
-		System.out.println("\t path01");
-		path01.print();
-		System.out.println("\t path10");
-		path10.print();
+		super.printFull();
 	}
 
 	

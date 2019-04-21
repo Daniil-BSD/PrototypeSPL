@@ -1,11 +1,17 @@
 package gameLogic;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * This class is responsible for the basic spacial units of the level, cells.
  */
-class Cell {
+class Cell implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1750788500748700957L;
 
 	/**
 	 * This attribute stores true if the cell is occupied by a car, false otherwise.

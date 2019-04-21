@@ -59,7 +59,7 @@ class SelectorPath extends Path {
 			if (localCell == cell)
 				break;
 		}
-				if (index < cells.length)
+		if (index < cells.length)
 			return cells[index];
 		if (index == cells.length)
 			return exits[selectedIndex];

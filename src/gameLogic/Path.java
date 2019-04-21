@@ -1,5 +1,6 @@
 package gameLogic;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.util.*;
 
@@ -7,8 +8,12 @@ import java.util.*;
  * The path is a sequence of cells along which the train moves which is
  * implemented by this class.
  */
-class Path {
+class Path implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2709873888519577921L;
 	protected Cell[] cells;
 	
 	/**
@@ -40,14 +45,14 @@ class Path {
 
 	public Cell NextCell(Cell cell) {
 		int index = 0;
-		for (Cell localCell : cells) {
-			index++;
-			if (localCell == cell)
+		for (index = 0; index < cells.length; index++) {
+			if (cells[index] == cell) {
 				break;
+			}
 		}
 
-	if (index < cells.length)
-			return cells[index];
+	if (index + 1 < cells.length)
+			return cells[index + 1 ];
 		return null;
 	}
 
@@ -77,18 +82,13 @@ class Path {
 	 * cells equal to length behind the car occupied as well.
 	 */
 	public void UpdatePresence(int length, Cell current) {
-
-		// TODO implement here
-		// finish this!!
-
 		int index = 0;
-		boolean found = false;
-		for (Cell localCell : cells) {
-			if (localCell == current) {
+;		boolean found = false;
+		for (index = 0; index < cells.length; index++) {
+			if (cells[index] == current) {
 				found = true;
 				break;
 			}
-			index++;
 		}
 		if (found) {
 			if (index < cells.length - 1) {
@@ -96,11 +96,11 @@ class Path {
 				for (; i < length && index - i >= 0; i++) {
 					cells[index - i].setOccupied(true);
 				}
-				if (++i == length) {
+				if (i == length && index - i >= 0) {
 					cells[index - i].setOccupied(false);
 				}
 			} else {
-				for (int i = 0; i < length && index - i >= 0; i++) {
+				for (int i = 0; i < length + 1  && index - i >= 0; i++) {
 					cells[index - i].setOccupied(false);
 				}
 			}
@@ -108,6 +108,7 @@ class Path {
 	}
 
 	public void print() {
+		System.out.println("\t[" + System.identityHashCode(this) + "]");
 		for (Cell cell : cells) {
 			System.out.println("\t\t" + cell.toString());
 		}

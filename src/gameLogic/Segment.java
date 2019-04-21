@@ -1,5 +1,6 @@
 package gameLogic;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.xml.stream.events.EndDocument;
@@ -12,7 +13,12 @@ import javax.xml.stream.events.EndDocument;
  * that, a segment is a sequence of cells along two paths in opposite directions
  * for the trains to traverse.
  */
-abstract class Segment {
+abstract class Segment implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 114076703858761588L;
 
 	/**
 	 * Default constructor
@@ -142,6 +148,11 @@ abstract class Segment {
 
 	}
 
-	public abstract void printFull();
+	public void printFull() {
+		System.out.print("\t path01");
+		path01.print();
+		System.out.print("\t path10");
+		path10.print();
+	};
 	
 }

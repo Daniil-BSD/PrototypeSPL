@@ -1,5 +1,7 @@
 package gameLogic;
 
+import java.awt.print.Printable;
+import java.io.Serializable;
 import java.util.*;
 
 import javax.xml.ws.handler.LogicalHandler;
@@ -8,7 +10,13 @@ import javax.xml.ws.handler.LogicalHandler;
  * This class is responsible for the moving objects on the level, like the
  * locomotive and the passenger car which are derived from this class.
  */
-abstract class Car {
+abstract class Car implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3574417194240339480L;
+
 	/**
 	 * Default constructor
 	 */
@@ -67,7 +75,6 @@ abstract class Car {
 	 * color. It will be bound to the system clock.
 	 */
 	public void Step() {
-
 		permissionToLeave = cell.LogicRequest(this);
 		if (permissionToLeave) {
 			if (nextCell == null && path != null)
@@ -137,5 +144,19 @@ abstract class Car {
 		}
 		return false;
 	}
-
+	
+	public void printFull(int tabs, int index) {
+		String string = "\t";
+		for(int i = 0; i < 0; i++) string += "/t";
+		System.out.println("Train index: " + index + " Car id: [" + System.identityHashCode(this) + "]");
+		System.out.println(string + "/tCurrent Cell: [" + System.identityHashCode(cell) + "]");
+		System.out.println(string + "/tCurrent Path: [" + System.identityHashCode(path) + "]");
+		CustomPrint(tabs, index);
+		System.out.print(string + "/tAttached Car:");
+		if(attachedCar != null) printFull(tabs + 1, index);
+		else System.out.println("(none)");
+	}
+	
+	public void CustomPrint(int tabs, int index) {}
+	
 }

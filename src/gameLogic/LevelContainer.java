@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
+import javax.print.attribute.PrintJobAttributeSet;
+
 /**
  * This class stores all the levels of the game. Also, the levels are managed
  * internally by this class. The segments are joined and the tunnels are
@@ -36,11 +38,15 @@ abstract class LevelContainer {
 	 * empty, the game is lost and the level is restarted.
 	 */
 	public static void FinalReport(Car car) {
-		if (car.IsEmpty())
-			Victory();
-		else
+		if (car.IsEmpty()) {
+			if(level.activeTrains.contains(car))
+				level.activeTrains.remove(car);
+			if(level.activeTrains.isEmpty())
+				Victory();
+		}else {
 			Defeat();
-		Stop();
+			Stop();
+		}
 	}
 
 	/**
@@ -48,20 +54,22 @@ abstract class LevelContainer {
 	 * Controller.
 	 */
 	public static void Join(String Sgm1ID, int end1ID, String Sgm2ID, int end2ID) {
-		Segment segment1 = level.FindSegment(Sgm1ID);
-		Segment segment2 = level.FindSegment(Sgm2ID);
-		if (segment1 != null && segment2 != null) {
-			if (segment1.IsEndFree(end1ID) && segment2.IsEndFree(end2ID)) {
-				Cell end1 = segment1.GetFreeEnd(end1ID);
-				Cell end2 = segment2.GetFreeEnd(end2ID);
-				segment1.ConnectTo(end1ID, end2);
-				segment2.ConnectTo(end2ID, end1);
+		if(!level.gameActive) {
+			Segment segment1 = level.FindSegment(Sgm1ID);
+			Segment segment2 = level.FindSegment(Sgm2ID);
+			if (segment1 != null && segment2 != null) {
+				if (segment1.IsEndFree(end1ID) && segment2.IsEndFree(end2ID)) {
+					Cell end1 = segment1.GetFreeEnd(end1ID);
+					Cell end2 = segment2.GetFreeEnd(end2ID);
+					segment1.ConnectTo(end1ID, end2);
+					segment2.ConnectTo(end2ID, end1);
+				} else {
+					System.out.println("Incorrect end(s)");
+					return;
+				}
 			} else {
-				System.out.println("Incorrect end(s)");
-				return;
+				System.out.println("Incorrect segment(s)");
 			}
-		} else {
-			System.out.println("Incorrect segment(s)");
 		}
 
 	}
@@ -108,13 +116,15 @@ abstract class LevelContainer {
 	 * the te and the selected entrance.
 	 */
 	public static void ConstructFrom(TunnelEntrance te) {
-		System.out.println("Tunnel Constructed");
-		te.FullClear();
-		selected.FullClear();
-		Tunnel newTunnel = LevelContainer.level.GetTunnelBetween(te, selected);
-		te.SetTunnel(newTunnel);
-		selected.SetTunnel(newTunnel);
-		selected = null;
+		if(!level.gameActive) {
+			System.out.println("Tunnel Constructed");
+			te.FullClear();
+			selected.FullClear();
+			Tunnel newTunnel = LevelContainer.level.GetTunnelBetween(te, selected);
+			te.SetTunnel(newTunnel);
+			selected.SetTunnel(newTunnel);
+			selected = null;
+		}
 	}
 
 	/**
@@ -159,13 +169,13 @@ abstract class LevelContainer {
 	 */
 	public static void SelectEntrance(TunnelEntrance te) {
 		selected = te;
-
 	}
 	/**
 	 * This method is called when a train derailed, which leads to defeat on the
 	 * current level.
 	 */
 	public static void Derailed(Car car) {
+		System.out.println("A car was derailed");
 		Defeat();
 	}
 
@@ -174,6 +184,7 @@ abstract class LevelContainer {
 	 * leads to defeat.
 	 */
 	public static void Collided(Car car) {
+		System.out.println("A car has collided");
 		Defeat();
 	}
 
@@ -182,7 +193,7 @@ abstract class LevelContainer {
 	 * fulfilled on the current level.
 	 */
 	public static void Victory(String message) {
-		Defeat();
+		Victory();
 	}
 
 	public static void Victory() {
@@ -193,27 +204,61 @@ abstract class LevelContainer {
 	 * This method is called when the game was lost. It stops the game on the level.
 	 */
 	public static void Defeat(String message) {
+		System.out.print(message);
 		Defeat();
 	}
 
 	public static void Defeat() {
+		if(gameTick != null) {
+			Pause();
+			System.out.println("The game is lost! Duration: " + gameTick.getTime());
+		}else {
+			System.out.println("The game is lost!");
+		}
 		Stop();
 	}
 	/**
 	 * This method starts the game on the current level, while also starting the clock.
 	 */
 
-	public static void Start() {
-		gameTick = new GameTick(10);
-		gameTick.start();
+	public static void StartWithoutClock() {
+		if(gameTick == null) {
+			level.Run();
+			gameTick = new GameTick(100);
+			gameTick.active = false;
+			gameTick.start();
+		}
 	}
+	
+	public static void Start() {
+		if(gameTick == null) {
+			level.Run();
+			gameTick = new GameTick(100);
+			gameTick.start();
+		}
+	}
+
+	
+	public static void Resume() {
+		if(gameTick != null) {
+			gameTick.active = true;
+		}
+	}
+	
+	public static void Pause() {
+		if(gameTick != null) {
+			gameTick.active = false;
+		}
+	}
+	
+	
 	/**
 	 * This method is loads the level to the level container.
 	 */
 	public static void Load(String name) {
 		try
 		{
-			FileInputStream fileIn = new FileInputStream("C:\\"+name+".lvl");
+			FileInputStream fileIn = new FileInputStream("D:\\"+name+".lvl");
 	        ObjectInputStream in = new ObjectInputStream(fileIn);
 	        level = (Level) in.readObject();
 	        in.close();
@@ -238,7 +283,7 @@ abstract class LevelContainer {
 	      try
 	      {
 	         FileOutputStream fileOut =
-	         new FileOutputStream("C:\\"+name+".lvl");
+	         new FileOutputStream("D:\\"+name+".lvl");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(level);
 	         out.close();
@@ -251,6 +296,7 @@ abstract class LevelContainer {
 	}
 
 	public static void Load(Level level) {
+		Stop();
 		LevelContainer.level = level;
 	}
 
@@ -283,22 +329,22 @@ abstract class LevelContainer {
 	}
 	
 	public static void printSegments() {
+		System.out.println("Printing the segment types, their identifiers and the paths with cells belonging to them.");
 		for(Segment s: level.segments) 
 			System.out.println("\t" + s.getClass().getSimpleName() + " \"" + s.id + "\"");
 	}
 		
 	
 	public static void printTrains() {
+		int i = 0;
+		System.out.println("Printing trains");
 		for(Locomotive l: level.trains) {
-			System.out.println("train " + l.curIndex);
-			
+			l.printFull(0, i);
 		}
 	}
 	
-	public static void getAll() {
-		System.out.println("Printing the segment types, their identifiers and the paths with cells belonging to them.");
+	public static void printAll() {
 		printFull();
-		System.out.println("Printing trains");
 		printTrains();
 		
 	}
@@ -318,10 +364,18 @@ abstract class LevelContainer {
 }
 class GameTick extends Thread {
 	public volatile boolean run = false;
+	public volatile boolean active;
 	private final int interval;
+	private int time;
+	
+	public int getTime() {
+		return time;
+	}
 
 	public GameTick(int interval) {
+		time = 0;
 		run = false;
+		active = true;
 		this.interval = interval;
 	}
 
@@ -329,7 +383,10 @@ class GameTick extends Thread {
 	public void run() {
 		run = true;
 		while (run) {
-			LevelContainer.Tick();
+			if(active) {
+				LevelContainer.Tick();
+				time++;
+			}
 			try {
 				sleep(interval);
 			} catch (InterruptedException e) {
