@@ -24,7 +24,7 @@ class Station extends Segment {
 		this.colors = colors;
 		cells = new Cell[18];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
-		for (int i = 1; i < 18; i++) {
+		for (int i = 0; i < 18; i++) {
 			cells[i] = new Cell();
 		}
 		for (int i = 0; i < 14; i++) {
@@ -90,8 +90,8 @@ class Station extends Segment {
 	public Cell GET_DEMO_CELL(int index) {
 		index %= 2;
 		if (index == 1)
-			return cells[11];
-		return cells[9];
+			return cells[9];
+		return cells[7];
 	}
 
 	// Method purely for skeleton

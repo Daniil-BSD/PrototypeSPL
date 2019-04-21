@@ -34,7 +34,7 @@ public abstract class LevelInitializer {
 	 */
 	public static void StatonDemoInitializer() {
 		LevelContainer.Load(new Level());
-		Station station = new Station("station", new Colors[] { Colors.Blue });
+		Station station = new FinalStation("station", new Colors[] { Colors.Blue });
 		LevelContainer.addSegment(station);
 		PassengerCar passengerCar = new PassengerCar(station.GET_DEMO_CELL(0), Colors.Blue);
 		Locomotive locomotive = new Locomotive(station.GET_DEMO_CELL(1));

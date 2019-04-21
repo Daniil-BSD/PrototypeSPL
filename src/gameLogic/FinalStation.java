@@ -23,6 +23,11 @@ class FinalStation extends Station {
 	public FinalStation(String id, Colors[] colors) {
 		super(id, colors);
 	}
+	
+	public void printFull() {
+		System.out.print("Final");
+		super.printFull();
+	}
 
 	/**
 	 * This method is used to identify the station as the final stop in the level.

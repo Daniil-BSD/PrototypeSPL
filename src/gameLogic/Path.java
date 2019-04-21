@@ -76,6 +76,16 @@ class Path implements Serializable {
 	public PathEnd GetEndLogic() {
 		return (PathEnd) cells[this.cells.length - 1].GetLogic();
 	}
+	
+	public Cell GetCellByInverseIndex(int index) {
+		int temp = cells.length - 1 -index;
+		if(temp < 0) throw new IllegalArgumentException();
+		return cells[temp];
+	}
+	
+	public int length() {
+		return cells.length;
+	}
 
 	/**
 	 * This method gets the cell, which is occupied by a car and makes the amount of

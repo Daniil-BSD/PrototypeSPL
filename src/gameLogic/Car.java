@@ -54,20 +54,6 @@ abstract class Car implements Serializable{
 	protected Car attachedCar;
 
 	/**
-	 * This attribute is here because of the cell logic. This is needed for the
-	 * train to know if he has to determine the next step or stay in one place.
-	 */
-	private boolean permissionToLeave;
-
-	/**
-	 * When the train is at the station, this attribute is used to know whether the
-	 * colors of the train and the station match so people should leave the station,
-	 * or the train can just pass through the station without dropping the
-	 * passengers.
-	 */
-	private Boolean peopleDisembarking;
-
-	/**
 	 * This method makes the objects on the level think about their next step and
 	 * consequently, move or not depending on the logic that is responsible for this
 	 * decision. For example, the train on the station will move if it does not
@@ -75,8 +61,7 @@ abstract class Car implements Serializable{
 	 * color. It will be bound to the system clock.
 	 */
 	public void Step() {
-		permissionToLeave = cell.LogicRequest(this);
-		if (permissionToLeave) {
+		if (cell.LogicRequest(this)) {
 			if (nextCell == null && path != null)
 				nextCell = this.path.NextCell(cell);
 			if (nextCell == null) {
@@ -142,18 +127,18 @@ abstract class Car implements Serializable{
 		if (attachedCar != null) {
 			return attachedCar.IsEmpty();
 		}
-		return false;
+		return true;
 	}
 	
 	public void printFull(int tabs, int index) {
-		String string = "\t";
-		for(int i = 0; i < 0; i++) string += "/t";
+		String string = "";
+		for(int i = 0; i < tabs; i++) string += "\t";
 		System.out.println("Train index: " + index + " Car id: [" + System.identityHashCode(this) + "]");
-		System.out.println(string + "/tCurrent Cell: [" + System.identityHashCode(cell) + "]");
-		System.out.println(string + "/tCurrent Path: [" + System.identityHashCode(path) + "]");
+		System.out.println(string + "\tCurrent Cell: [" + System.identityHashCode(cell) + "]");
+		System.out.println(string + "\tCurrent Path: [" + System.identityHashCode(path) + "]");
 		CustomPrint(tabs, index);
-		System.out.print(string + "/tAttached Car:");
-		if(attachedCar != null) printFull(tabs + 1, index);
+		System.out.print(string + "\tAttached Car: ");
+		if(attachedCar != null) attachedCar.printFull(tabs + 1, index);
 		else System.out.println("(none)");
 	}
 	

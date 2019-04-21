@@ -36,9 +36,9 @@ public abstract class ConsoleInterpreter {
 						try {
 							List<Colors> colors = new ArrayList<>();
 							for (int i = 3; i < command.length; i++) {
-								colors.add(Colors.valueOf(command[i]));
+								colors.add(Colors.parse(command[i]));
 							}
-							newSegment = new FinalStation(command[2], colors.toArray(new Colors[command.length - 3]));
+							newSegment = new Station(command[2], colors.toArray(new Colors[command.length - 3]));
 							LevelContainer.addSegment(newSegment);
 						} catch (IllegalArgumentException e) {
 							System.out.println("The color was not specified correctly");
@@ -52,12 +52,11 @@ public abstract class ConsoleInterpreter {
 						newSegment = new TunnelEntrance(command[2]);
 						LevelContainer.addSegment(newSegment);
 					} else if (command[1].equals("finalstation") && command.length > 3) {
-						System.out.println("Adding a station...");
+						System.out.println("Adding a final station...");
 						try {
 							List<Colors> colors = new ArrayList<>();
 							for (int i = 3; i < command.length; i++) {
-								colors.add(Colors.valueOf(command[i]));
-
+								colors.add(Colors.parse(command[i]));
 							}
 							newSegment = new FinalStation(command[2], colors.toArray(new Colors[command.length - 3]));
 							LevelContainer.addSegment(newSegment);
@@ -71,7 +70,7 @@ public abstract class ConsoleInterpreter {
 			}
 
 			if (command[0].equals("select") && command.length > 1) {
-				System.out.println("The select command was processed");
+				System.out.println("The select command is being processed");
 				Segment presentSegment = LevelContainer.FindSegment(command[1]);
 				if (presentSegment != null) {
 					presentSegment.Select();
@@ -82,11 +81,10 @@ public abstract class ConsoleInterpreter {
 			}
 
 			if (command[0].equals("join") && command.length == 5) {
-				System.out.println("The join command being processed");
+				System.out.println("The join command is being processed");
 				try {
 					LevelContainer.Join(command[1], Integer.parseInt(command[2]), command[3],
 							Integer.parseInt(command[4]));
-
 				} catch (NumberFormatException e) {
 					System.out.println("Incorrect input");
 				}
@@ -106,21 +104,48 @@ public abstract class ConsoleInterpreter {
 						}
 					} catch (NumberFormatException e) {
 					}
-
 				} else {
 					throw new InvalidParameterException("Incorrect segments");
-
 				}
 
 			}
 			if (command[0].equals("place") && command.length > 3) {
-				System.out.println("The place command was processed");
-				Segment entrance = LevelContainer.FindSegment(command[1]);
-				try {
-					entrance.GetPathEndingWith(Integer.parseInt(command[2]));
-					System.out.println("The train was successfully placed");
-				} catch (NumberFormatException e) {
-					System.out.println("Incorrect input");
+				System.out.println("The place command is being processed");
+				Segment segment = LevelContainer.FindSegment(command[1]);
+				if(segment != null) {
+					try {
+						Path path = segment.GetPathEndingWith(Integer.parseInt(command[2]));
+						if(path != null) {
+							try {
+								List<Colors> colors = new ArrayList<>();
+								for (int i = 3; i < command.length; i++) {
+									colors.add(Colors.parse(command[i]));
+								}
+								if(path.length() > 2 * colors.size() + 2) {
+									Locomotive locomotive = new Locomotive(path.GetCellByInverseIndex(0));
+									locomotive.SetPath(path);
+									Car oldTemp = locomotive;
+									for(int i = 0; i < colors.size(); i++) {
+										Car loopTemp = new PassengerCar(path.GetCellByInverseIndex(2 + i * 2), colors.get(i));
+										loopTemp.SetPath(path);
+										oldTemp.attach(loopTemp);
+										oldTemp = loopTemp;
+									}
+									LevelContainer.addLocomotive(locomotive);
+								}else {
+									System.out.println("The Specified color is not long enough");
+								}
+							} catch (IllegalArgumentException e) {
+								System.out.println("The color was not specified correctly");
+							}
+						}else {
+							System.out.println("Selected segment has no respective path");
+						}
+					} catch (NumberFormatException e) {
+						System.out.println("Incorrect input");
+					}
+				}else {
+					System.out.println("Selected segment was not found");
 				}
 			}
 			if (command[0].equals("start") && command.length == 1 ) {
@@ -178,7 +203,7 @@ public abstract class ConsoleInterpreter {
 				}
 			}
 			if (command[0].equals("step") && command.length > 1) {
-				System.out.println("The step command was processed");
+				System.out.println("The step command is being processed");
 				try {
 					LevelContainer.Step(Integer.parseInt(command[1]));
 				} catch (IllegalArgumentException e) {

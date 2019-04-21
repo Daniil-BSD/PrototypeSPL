@@ -32,7 +32,10 @@ class PassengerCar extends Car {
 	public boolean isFull() {
 		return full;
 	}
-
+	@Override
+	public boolean IsEmpty() {
+		return super.IsEmpty() && !full;
+	}
 	/**
 	 * This method compares the colors of the station with the train's colors if the
 	 * train is full. If the color matches, the full attribute is set to null and
@@ -44,8 +47,7 @@ class PassengerCar extends Car {
 	public boolean CurrentlyAtTheStation_Universal(Colors[] colors) {
 		if (full) {
 			for (Colors c : colors) {
-				if (c.toString().equals(this.color.toString())) {
-
+				if (c.equals(color)) {
 					full = false;
 					return true;
 				}
@@ -59,8 +61,8 @@ class PassengerCar extends Car {
 	@Override
 	public void CustomPrint (int tabs, int index) {
 		String string = "\t";
-		for(int i = 0; i < 0; i++) string += "/t";
-		System.out.println(string + "/tColor: " + color.toString());
-		System.out.println(string + "/tFull: " + full);
+		for(int i = 0; i < tabs; i++) string += "\t";
+		System.out.println(string + "\tColor: " + color.toString());
+		System.out.println(string + "\tFull: " + full);
 	}
 }

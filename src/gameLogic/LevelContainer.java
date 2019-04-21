@@ -46,7 +46,6 @@ abstract class LevelContainer {
 				Victory();
 		}else {
 			Defeat();
-			Stop();
 		}
 	}
 
@@ -198,6 +197,7 @@ abstract class LevelContainer {
 	}
 
 	public static void Victory() {
+		System.out.println("Victory!");
 		Stop();
 	}
 

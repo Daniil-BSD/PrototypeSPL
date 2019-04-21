@@ -10,14 +10,6 @@ import javax.sql.rowset.Joinable;
  */
 class Fork extends Segment {
 	/**
-	 * Default constructor
-	 */
-
-	public Fork() {
-
-	}
-
-	/**
 	 * Constructor that creates the fork and the respective paths.
 	 */
 
@@ -101,6 +93,16 @@ class Fork extends Segment {
 		}
 		return true;
 	}
+	
+	@Override
+	public Path GetPathEndingWith (int endID) {
+		if (endID == 2)
+			return path02;
+		if (endID == 1)
+			return path01;
+		return null;
+	}
+
 
 	/**
 	 * This method chooses the path for the train on the fork. The first cell of the
