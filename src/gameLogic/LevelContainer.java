@@ -2,6 +2,7 @@ package gameLogic;
 
 import java.io.Console;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -258,16 +259,19 @@ abstract class LevelContainer {
 	public static void Load(String name) {
 		try
 		{
-			FileInputStream fileIn = new FileInputStream("D:\\"+name+".lvl");
+			FileInputStream fileIn = new FileInputStream("C:\\Users\\Public"+name+".lvl");
 	        ObjectInputStream in = new ObjectInputStream(fileIn);
 	        level = (Level) in.readObject();
 	        in.close();
 	        fileIn.close();
 	        }
+		catch(FileNotFoundException f)
+		{
+			System.out.println("The filename is not finded.");
+	        }
 		catch(IOException i)
 		{
 			i.printStackTrace();
-	        return;
 	        }
 		catch(ClassNotFoundException c)
 		{
@@ -275,6 +279,9 @@ abstract class LevelContainer {
 	        c.printStackTrace();
 	        return;
 	        }
+		finally {
+		      System.out.println("The Load is finished.");
+		    }
 	}
 	/**
 	 * This method is saves the level to the file.
@@ -283,16 +290,18 @@ abstract class LevelContainer {
 	      try
 	      {
 	         FileOutputStream fileOut =
-	         new FileOutputStream("D:\\"+name+".lvl");
+	         new FileOutputStream("C:\\Users\\Public"+name+".lvl",false);
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	         out.writeObject(level);
 	         out.close();
 	         fileOut.close();
-	         System.out.printf("Serialized data is saved in C:\\"+name+".lvl");
+	         System.out.printf("Serialized data is saved in C:\\Users\\Public"+name+".lvl");
 	      }catch(IOException i)
 	      {
 	          i.printStackTrace();
-	      }
+	      }finally {
+		      System.out.println("The Save is finished.");
+		    }
 	}
 
 	public static void Load(Level level) {
