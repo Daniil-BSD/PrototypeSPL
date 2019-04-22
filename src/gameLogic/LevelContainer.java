@@ -1,6 +1,7 @@
 package gameLogic;
 
 import java.io.Console;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,6 +34,9 @@ abstract class LevelContainer {
 	 * This attribute stores the tunnel entrance highlighted by the player.
 	 */
 	private static TunnelEntrance selected;
+	
+	public static final String PERSISTANCE_PATH = "C:\\Users\\Public\\";
+	public static final String FILE_EXTENSION = ".lvl";
 	/**
 	 * This method gets the cars which are arrived at the final station. If the
 	 * train is empty, the train waits at the Final Station. If the train is not
@@ -257,51 +261,44 @@ abstract class LevelContainer {
 	 * This method is loads the level to the level container.
 	 */
 	public static void Load(String name) {
-		try
-		{
-			FileInputStream fileIn = new FileInputStream("C:\\Users\\Public"+name+".lvl");
-	        ObjectInputStream in = new ObjectInputStream(fileIn);
-	        level = (Level) in.readObject();
-	        in.close();
-	        fileIn.close();
-	        }
-		catch(FileNotFoundException f)
-		{
-			System.out.println("The filename is not finded.");
-	        }
-		catch(IOException i)
-		{
-			i.printStackTrace();
-	        }
-		catch(ClassNotFoundException c)
-		{
-			System.out.println("Level class not found");
-	        c.printStackTrace();
-	        return;
-	        }
-		finally {
-		      System.out.println("The Load is finished.");
-		    }
+		File file = new File(PERSISTANCE_PATH + name + FILE_EXTENSION);
+		if (file.isFile() && file.getName().endsWith(FILE_EXTENSION) && file.exists()){
+			try {
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+				level = (Level) ois.readObject();
+				ois.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Failed to load the file (does not exsist)");
+			Load(new Level());
+		}
 	}
 	/**
 	 * This method is saves the level to the file.
 	 */
 	public static void Save(String name) {
-	      try
-	      {
-	         FileOutputStream fileOut =
-	         new FileOutputStream("C:\\Users\\Public"+name+".lvl",false);
-	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	         out.writeObject(level);
-	         out.close();
-	         fileOut.close();
-	         System.out.printf("Serialized data is saved in C:\\Users\\Public"+name+".lvl");
-	      }catch(IOException i)
-	      {
-	          i.printStackTrace();
-	      }finally {
-		      System.out.println("The Save is finished.");
-		    }
+		File file = new File(PERSISTANCE_PATH + name + FILE_EXTENSION);
+		if (file.exists() && file.isFile() && file.getName().endsWith(FILE_EXTENSION) || !file.exists()) {
+			ObjectOutputStream oos;
+			try {
+				oos = new ObjectOutputStream(new FileOutputStream(file));
+				oos.writeObject(level);
+				oos.close();
+				System.out.println("Saved into the file \"" + file.getName() +"\"" );
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Failed to save into the file (Try a simpler name)");
+		}
 	}
 
 	public static void Load(Level level) {
