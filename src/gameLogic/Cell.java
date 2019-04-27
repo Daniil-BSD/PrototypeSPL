@@ -22,11 +22,17 @@ class Cell implements Serializable{
 	 * This attribute stores the logic which decides the next move for the car.
 	 */
 	private CellLogic logic;
+	
+	/**
+	 * Coordinates of the cell
+	 */
+	public final vec2 localPosition;
 
 	/**
 	 * Default constructor
 	 */
-	public Cell() {
+	public Cell(float X, float Y) {
+		localPosition = new vec2(X,Y);
 		occupied = false;
 	}
 
@@ -70,8 +76,9 @@ class Cell implements Serializable{
 	
 	@Override
 	public String toString() {
+		
 		return "Cell [" + System.identityHashCode(this) + "]: occupied = " + occupied +" ; logic: " + 
-		((logic != null)? logic.toString(): "(none)");
+		((logic != null)? logic.toString(): "(none)") + " Coordinates: ("+ localPosition.x + ","+ localPosition.y +")";
 	}
 
 }

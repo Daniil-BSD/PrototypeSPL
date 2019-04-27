@@ -18,9 +18,27 @@ class Fork extends Segment {
 		cells = new Cell[17];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
 		LinkedList<Cell> temp2 = new LinkedList<Cell>();
-		for (int i = 0; i < 17; i++) {
-			cells[i] = new Cell();
-		}
+		
+		
+		//for (int i = 0; i < 17; i++) {		}
+		cells[0] = new Cell(0,4); 
+		cells[1] = new Cell(0,3); 
+		cells[2] = new Cell(-1,2); 
+		cells[3] = new Cell(1,2); 
+		cells[4] = new Cell(-2,1);
+		cells[5] = new Cell(-3,0);
+		cells[6] = new Cell(-4,0);
+		cells[7] = new Cell(2,1);
+		cells[8] = new Cell(3,0);
+		cells[9] = new Cell(4,0);
+		cells[10] = new Cell(-4,0);
+		cells[11] = new Cell(-2,1); 
+		cells[12] = new Cell(-1,2);
+		cells[13] = new Cell(4,0);
+		cells[14] = new Cell(2,1);
+		cells[15] = new Cell(1,2);
+		cells[16] = new Cell(0,4);
+		
 		int i = 0;
 		for (; i < 2; i++) {
 			temp.add(cells[i]);
