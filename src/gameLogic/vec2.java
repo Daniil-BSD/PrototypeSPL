@@ -71,11 +71,11 @@ public class vec2 {
 			v[0].x = (float)(p1.x - sqrt2 * d * Math.cos(sqrt2 / 2 - alpha));
 			v[0].y = (float)(p1.y + sqrt2 * d * Math.sin(sqrt2 / 2 - alpha));
 			
-			v[1].x = (float)(p1.x + sqrt2 * d * Math.cos(sqrt2 / 2 + alpha));
-			v[1].y = (float)(p1.y + sqrt2 * d * Math.sin(sqrt2 / 2 + alpha));
+			v[1].x = (float)(p2.x + sqrt2 * d * Math.cos(sqrt2 / 2 + alpha));
+			v[1].y = (float)(p2.y + sqrt2 * d * Math.sin(sqrt2 / 2 + alpha));
 			
-			v[2].x = (float)(p1.x + sqrt2 * d * Math.cos(sqrt2 / 2 - alpha));
-			v[2].y = (float)(p1.y - sqrt2 * d * Math.sin(sqrt2 / 2 - alpha));
+			v[2].x = (float)(p2.x + sqrt2 * d * Math.cos(sqrt2 / 2 - alpha));
+			v[2].y = (float)(p2.y - sqrt2 * d * Math.sin(sqrt2 / 2 - alpha));
 			
 			v[3].x = (float)(p1.x - sqrt2 * d * Math.cos(sqrt2 / 2 + alpha));
 			v[3].y = (float)(p1.y - sqrt2 * d * Math.sin(sqrt2 / 2 + alpha));
@@ -88,7 +88,7 @@ public class vec2 {
 		vec2[] pts = getPolygon(0.5f, p1, p2);
 		if(pts == null)
 		{
-			
+			System.out.println("pts is empty");
 		}
 		for(vec2 v : pts)
 		{
