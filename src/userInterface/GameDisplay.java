@@ -20,6 +20,7 @@ public class GameDisplay extends Canvas {
 	
 	public void paint(Graphics g) {  
 		//will be changed
+		
         g.drawString("Hello",40,40);  
         setBackground(Color.WHITE);  
         g.fillRect(130, 30,100, 80);  
