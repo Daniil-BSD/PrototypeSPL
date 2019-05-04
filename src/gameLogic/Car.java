@@ -10,7 +10,7 @@ import javax.xml.ws.handler.LogicalHandler;
  * This class is responsible for the moving objects on the level, like the
  * locomotive and the passenger car which are derived from this class.
  */
-abstract class Car implements Serializable{
+public abstract class Car implements Serializable{
 
 	/**
 	 * 
@@ -87,6 +87,10 @@ abstract class Car implements Serializable{
 	 */
 	public void attach(Car car) {
 		attachedCar = car;
+	}
+
+	public Car getAttachedCar() {
+		return attachedCar;
 	}
 
 	/**

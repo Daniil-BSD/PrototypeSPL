@@ -24,9 +24,13 @@ class Station extends Segment {
 		this.colors = colors;
 		cells = new Cell[18];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
-		for (int i = 0; i < 18; i++) {
-			cells[i] = new Cell();
+		for (int i = 0; i <= 13; i++) {
+			cells[i] = new Cell(0,3-i);
 		}
+		cells[14] = new Cell(0, -10);
+		cells[15] = new Cell(0, -8);
+		cells[16] = new Cell(0, 1);
+		cells[17] = new Cell(0, 3);
 		for (int i = 0; i < 14; i++) {
 			temp.add(cells[i]);
 		}

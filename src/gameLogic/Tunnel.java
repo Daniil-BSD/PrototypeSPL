@@ -15,10 +15,10 @@ class Tunnel extends Segment {
 		super();
 		cells = new Cell[4 + length];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
-		cells[length + 2] = new Cell();
-		cells[length + 3] = new Cell();
+		cells[length + 2] = new Cell(0,0, false);
+		cells[length + 3] = new Cell(0,0, false);
 		for (int i = 0; i < length + 2; i++) {
-			cells[i] = new Cell();
+			cells[i] = new Cell(0,0, false);
 			temp.add(cells[i]);
 		}
 		path01 = new Path(temp.toArray(new Cell[temp.size()]));

@@ -20,7 +20,6 @@ class Straight extends Segment {
 		cells[8] = new Cell(0,3);
 		int j=3;
 		for (int i = 0; i < 7; i++) {
-			
 			cells[i] = new Cell(0,j);
 			j--;
 			temp.add(cells[i]);

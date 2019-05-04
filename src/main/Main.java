@@ -1,9 +1,11 @@
 package main;
 
+import java.awt.EventQueue;
 import java.io.*;
 import java.security.InvalidParameterException;
 
 import gameLogic.ConsoleInterpreter;
+import userInterface.MainFrame;
 
 /**
  * 

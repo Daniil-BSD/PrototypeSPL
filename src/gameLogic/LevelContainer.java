@@ -12,6 +12,9 @@ import java.util.*;
 
 import javax.print.attribute.PrintJobAttributeSet;
 
+import userInterface.GameDisplay;
+import userInterface.MainFrame;
+
 /**
  * This class stores all the levels of the game. Also, the levels are managed
  * internally by this class. The segments are joined and the tunnels are
@@ -34,9 +37,31 @@ abstract class LevelContainer {
 	 * This attribute stores the tunnel entrance highlighted by the player.
 	 */
 	private static TunnelEntrance selected;
-	
+
 	public static final String PERSISTANCE_PATH = "C:\\Users\\Public\\";
 	public static final String FILE_EXTENSION = ".lvl";
+
+	private static MainFrame frame = null;
+	private static GameDisplay gameDisplay = null;
+	private static InputInterpriter inputInterpriter = null;
+
+	public static void OpenWindow() {
+		if (frame == null) {
+			System.out.println("Opening the window");
+			frame = new MainFrame();
+			inputInterpriter = new InputInterpriter();
+			frame.addActionEventListenerToButtons(inputInterpriter);
+			gameDisplay = frame.getGameDisplay();
+		}
+	}
+	
+	
+	public static void FullLevelRedraw() {
+		if(gameDisplay != null && level != null) {
+			gameDisplay.FullRedraw(level.segments, level.trains);
+		}
+	}
+
 	/**
 	 * This method gets the cars which are arrived at the final station. If the
 	 * train is empty, the train waits at the Final Station. If the train is not
@@ -44,11 +69,11 @@ abstract class LevelContainer {
 	 */
 	public static void FinalReport(Car car) {
 		if (car.IsEmpty()) {
-			if(level.activeTrains.contains(car))
+			if (level.activeTrains.contains(car))
 				level.activeTrains.remove(car);
-			if(level.activeTrains.isEmpty())
+			if (level.activeTrains.isEmpty())
 				Victory();
-		}else {
+		} else {
 			Defeat();
 		}
 	}
@@ -58,7 +83,7 @@ abstract class LevelContainer {
 	 * Controller.
 	 */
 	public static void Join(String Sgm1ID, int end1ID, String Sgm2ID, int end2ID) {
-		if(!level.gameActive) {
+		if (!level.gameActive) {
 			Segment segment1 = level.FindSegment(Sgm1ID);
 			Segment segment2 = level.FindSegment(Sgm2ID);
 			if (segment1 != null && segment2 != null) {
@@ -96,13 +121,14 @@ abstract class LevelContainer {
 	}
 
 	public static void Step(int index) {
-		if(level.trains.size() > index) {
+		if (level.trains.size() > index) {
 			System.out.println("Stepping the specified locomotive");
 			level.trains.get(index).Step();
 		}
 		System.out.println("Locomotive was not found");
-		
+
 	}
+
 	/**
 	 * This method returns boolean value after checking if the tunnel is possible
 	 * from the given entrance.
@@ -120,7 +146,7 @@ abstract class LevelContainer {
 	 * the te and the selected entrance.
 	 */
 	public static void ConstructFrom(TunnelEntrance te) {
-		if(!level.gameActive) {
+		if (!level.gameActive) {
 			System.out.println("Tunnel Constructed");
 			te.FullClear();
 			selected.FullClear();
@@ -143,6 +169,8 @@ abstract class LevelContainer {
 	 */
 	public static void addSegment(Segment sgm) {
 		level.addSegment(sgm);
+		if(gameDisplay != null)
+			gameDisplay.AddSegment(sgm);
 	}
 
 	/**
@@ -150,6 +178,9 @@ abstract class LevelContainer {
 	 */
 	public static void addLocomotive(Locomotive locomotive) {
 		level.addLcomotive(locomotive);
+		if(gameDisplay != null) {
+			gameDisplay.AddCar(locomotive);
+		}
 	}
 
 	/**
@@ -174,6 +205,7 @@ abstract class LevelContainer {
 	public static void SelectEntrance(TunnelEntrance te) {
 		selected = te;
 	}
+
 	/**
 	 * This method is called when a train derailed, which leads to defeat on the
 	 * current level.
@@ -193,8 +225,8 @@ abstract class LevelContainer {
 	}
 
 	/**
-	 * This method and is called when the conditions for winning on the level have been
-	 * fulfilled on the current level.
+	 * This method and is called when the conditions for winning on the level have
+	 * been fulfilled on the current level.
 	 */
 	public static void Victory(String message) {
 		Victory();
@@ -214,55 +246,55 @@ abstract class LevelContainer {
 	}
 
 	public static void Defeat() {
-		if(gameTick != null) {
+		if (gameTick != null) {
 			Pause();
 			System.out.println("The game is lost! Duration: " + gameTick.getTime());
-		}else {
+		} else {
 			System.out.println("The game is lost!");
 		}
 		Stop();
 	}
+
 	/**
-	 * This method starts the game on the current level, while also starting the clock.
+	 * This method starts the game on the current level, while also starting the
+	 * clock.
 	 */
 
 	public static void StartWithoutClock() {
-		if(gameTick == null) {
+		if (gameTick == null) {
 			level.Run();
 			gameTick = new GameTick(100);
 			gameTick.active = false;
 			gameTick.start();
 		}
 	}
-	
+
 	public static void Start() {
-		if(gameTick == null) {
+		if (gameTick == null) {
 			level.Run();
 			gameTick = new GameTick(100);
 			gameTick.start();
 		}
 	}
 
-	
 	public static void Resume() {
-		if(gameTick != null) {
+		if (gameTick != null) {
 			gameTick.active = true;
 		}
 	}
-	
+
 	public static void Pause() {
-		if(gameTick != null) {
+		if (gameTick != null) {
 			gameTick.active = false;
 		}
 	}
-	
-	
+
 	/**
 	 * This method is loads the level to the level container.
 	 */
 	public static void Load(String name) {
 		File file = new File(PERSISTANCE_PATH + name + FILE_EXTENSION);
-		if (file.isFile() && file.getName().endsWith(FILE_EXTENSION) && file.exists()){
+		if (file.isFile() && file.getName().endsWith(FILE_EXTENSION) && file.exists()) {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 				level = (Level) ois.readObject();
@@ -279,18 +311,18 @@ abstract class LevelContainer {
 			Load(new Level());
 		}
 	}
+
 	/**
 	 * This method is saves the level to the file.
 	 */
 	public static void Save(String name) {
 		File file = new File(PERSISTANCE_PATH + name + FILE_EXTENSION);
 		if (file.exists() && file.isFile() && file.getName().endsWith(FILE_EXTENSION) || !file.exists()) {
-			ObjectOutputStream oos;
 			try {
-				oos = new ObjectOutputStream(new FileOutputStream(file));
+				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
 				oos.writeObject(level);
 				oos.close();
-				System.out.println("Saved into the file \"" + file.getName() +"\"" );
+				System.out.println("Saved into the file \"" + file.getName() + "\"");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -322,58 +354,58 @@ abstract class LevelContainer {
 	public static void Tick() {
 		level.Tick();
 	}
-	
+
 	public static void printTypes() {
-		for(Segment s: level.segments) 
+		for (Segment s : level.segments)
 			System.out.println("\t" + s.getClass().getSimpleName());
-		
+
 	}
-	
+
 	public static void printSimpleNames() {
-		for(Segment s: level.segments) 
+		for (Segment s : level.segments)
 			System.out.println("\t\"" + s.id + "\"");
 	}
-	
+
 	public static void printSegments() {
 		System.out.println("Printing the segment types, their identifiers and the paths with cells belonging to them.");
-		for(Segment s: level.segments) 
+		for (Segment s : level.segments)
 			System.out.println("\t" + s.getClass().getSimpleName() + " \"" + s.id + "\"");
 	}
-		
-	
+
 	public static void printTrains() {
 		int i = 0;
 		System.out.println("Printing trains");
-		for(Locomotive l: level.trains) {
-			l.printFull(0, i);
+		for (Locomotive l : level.trains) {
+			l.printFull(0, i++);
 		}
 	}
-	
+
 	public static void printAll() {
 		printFull();
 		printTrains();
-		
+
 	}
+
 	public static void printFull() {
-		if(level.segments.size() == 0) {
+		if (level.segments.size() == 0) {
 			System.out.println("No data");
 			return;
 		}
-		for(Segment s: level.segments) {
+		for (Segment s : level.segments) {
 
 			s.printFull();
 		}
-		
+
 	}
-	
-	
+
 }
+
 class GameTick extends Thread {
 	public volatile boolean run = false;
 	public volatile boolean active;
 	private final int interval;
 	private int time;
-	
+
 	public int getTime() {
 		return time;
 	}
@@ -389,7 +421,7 @@ class GameTick extends Thread {
 	public void run() {
 		run = true;
 		while (run) {
-			if(active) {
+			if (active) {
 				LevelContainer.Tick();
 				time++;
 			}

@@ -16,7 +16,9 @@ class Cell implements Serializable{
 	/**
 	 * This attribute stores true if the cell is occupied by a car, false otherwise.
 	 */
-	private Boolean occupied;
+	private boolean occupied;
+	
+	private boolean visible;
 
 	/**
 	 * This attribute stores the logic which decides the next move for the car.
@@ -31,9 +33,18 @@ class Cell implements Serializable{
 	/**
 	 * Default constructor
 	 */
+	public Cell(vec2 position) {
+		this(position.x, position.y, true);
+	}
+	
 	public Cell(float X, float Y) {
+		this(X, Y, true);
+	}
+	
+	public Cell(float X, float Y, boolean visible) {
 		localPosition = new vec2(X,Y);
 		occupied = false;
+		this.visible = visible;
 	}
 
 	public boolean LogicRequest(Car car) {
@@ -77,8 +88,8 @@ class Cell implements Serializable{
 	@Override
 	public String toString() {
 		
-		return "Cell [" + System.identityHashCode(this) + "]: occupied = " + occupied +" ; logic: " + 
-		((logic != null)? logic.toString(): "(none)") + " Coordinates: ("+ localPosition.x + ","+ localPosition.y +")";
+		return "Cell [" + System.identityHashCode(this) + "]: occupied = " + occupied  + "; Coordinates: ("+ localPosition.x + ","+ localPosition.y +")"+ " ; logic: " + 
+		((logic != null)? logic.toString(): "(none)");
 	}
 
 }

@@ -68,11 +68,11 @@ public abstract class LevelInitializer {
 		TunnelEntrance entrance1 = new TunnelEntrance("e1");
 		TunnelEntrance entrance2 = new TunnelEntrance("e2");
 		TunnelEntrance entrance3 = new TunnelEntrance("e3");
-		//Tunnel tunnel = new Tunnel(entrance1, entrance2);
+		Tunnel tunnel = new Tunnel(entrance1, entrance2, 6);
 		LevelContainer.addSegment(entrance1);
 		LevelContainer.addSegment(entrance2);
 		LevelContainer.addSegment(entrance3);
-		//LevelContainer.addTunnel(tunnel);
+		LevelContainer.addTunnel(tunnel);
 	}
 }
 

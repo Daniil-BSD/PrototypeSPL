@@ -14,6 +14,7 @@ import main.Main;
 public abstract class ConsoleInterpreter {
 	public static void Prepare() {
 		LevelContainer.Load(new Level());
+		LevelContainer.OpenWindow();
 	}
 
 	/**
@@ -272,7 +273,6 @@ public abstract class ConsoleInterpreter {
 				System.out.println("Quitting...");
 				Main.run = false;
 			} else {
-
 				System.out.println("Input the command:");
 			}
 		}

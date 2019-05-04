@@ -16,10 +16,10 @@ class TunnelEntrance extends Segment {
 		super(id);
 		cells = new Cell[4];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
-		cells[0] = new Cell();
-		cells[1] = new Cell();
-		cells[2] = new Cell();
-		cells[3] = new Cell();
+		cells[0] = new Cell(0, 3);
+		cells[1] = new Cell(0, 2);
+		cells[2] = new Cell(0, 2);
+		cells[3] = new Cell(0, 3);
 		temp.add(cells[0]);
 		temp.add(cells[1]);
 		path01 = new Path(temp.toArray(new Cell[temp.size()]));

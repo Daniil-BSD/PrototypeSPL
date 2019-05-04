@@ -13,7 +13,7 @@ import javax.xml.stream.events.EndDocument;
  * that, a segment is a sequence of cells along two paths in opposite directions
  * for the trains to traverse.
  */
-abstract class Segment implements Serializable{
+public abstract class Segment implements Serializable{
 
 	/**
 	 * 
