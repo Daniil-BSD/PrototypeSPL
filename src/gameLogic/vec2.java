@@ -62,7 +62,7 @@ public class vec2 {
 			ret.addPoint(Math.round(p1.x - d), Math.round(p1.y + d));
 			ret.addPoint(Math.round(p2.x + d), Math.round(p2.y + d));
 			ret.addPoint(Math.round(p2.x + d), Math.round(p2.y - d));
-		} else if (p2.y != p1.y && p1.x < p2.x){
+		} else if (p2.y != p1.y && p2.x != p1.x && p1.x < p2.x){
 			float alpha = (float) Math.atan((p2.y - p1.y) / (p2.x - p1.x));
 			float temp_cosp = (float) (sqrt2 * d * Math.cos(sqrt2 / 2 + alpha));
 			float temp_sinp = (float) (sqrt2 * d * Math.sin(sqrt2 / 2 + alpha));
@@ -72,7 +72,7 @@ public class vec2 {
 			ret.addPoint(Math.round(p2.x + temp_cosp), Math.round(p2.y + temp_sinp));
 			ret.addPoint(Math.round(p2.x + temp_cosm), Math.round(p2.y - temp_sinm));
 			ret.addPoint(Math.round(p1.x - temp_cosp), Math.round(p1.y - temp_sinp));
-		} else if (p2.y != p1.y && p1.x > p2.x){
+		} else if (p2.y != p1.y && p2.x != p1.x && p1.x > p2.x){
 			float alpha = (float) Math.atan((p2.y - p1.y) / (p2.x - p1.x));
 			float temp_cosp = (float) (sqrt2 * d * Math.cos(sqrt2 / 2 + alpha));
 			float temp_sinp = (float) (sqrt2 * d * Math.sin(sqrt2 / 2 + alpha));
@@ -148,7 +148,7 @@ public class vec2 {
 
 			v[3].x = p2.x - d;
 			v[3].y = p2.y - d;
-		}  else if (p2.y != p1.y && p1.x < p2.x) {
+		}  else if (p2.y != p1.y && p2.x != p1.x && p1.x < p2.x) {
 			double alpha = Math.atan((p2.y - p1.y) / (p2.x - p1.x));
 			v[0].x = (float) (p1.x - sqrt2 * d * Math.cos(sqrt2 / 2 - alpha));
 			v[0].y = (float) (p1.y + sqrt2 * d * Math.sin(sqrt2 / 2 - alpha));
@@ -161,7 +161,7 @@ public class vec2 {
 
 			v[3].x = (float) (p1.x - sqrt2 * d * Math.cos(sqrt2 / 2 + alpha));
 			v[3].y = (float) (p1.y - sqrt2 * d * Math.sin(sqrt2 / 2 + alpha));
-		} else if (p2.y != p1.y && p1.x > p2.x) {
+		} else if (p2.y != p1.y && p2.x != p1.x && p1.x > p2.x) {
 			double alpha = Math.atan((p2.y - p1.y) / (p2.x - p1.x));
 			v[0].x = (float) (p2.x - sqrt2 * d * Math.cos(sqrt2 / 2 - alpha));
 			v[0].y = (float) (p2.y + sqrt2 * d * Math.sin(sqrt2 / 2 - alpha));
