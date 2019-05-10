@@ -3,6 +3,7 @@ package gameLogic;
 import java.io.Serializable;
 
 import cellLogic.PathEnd;
+import userInterface.UIsegment;
 
 /**
  * This class is responsible for bigger units of space of the level than cells -
@@ -24,6 +25,8 @@ public abstract class Segment implements Serializable{
 	 */
 	protected Segment() {
 		this.id = this.getClass().getSimpleName() + System.identityHashCode(this);
+		rotation = 0;
+		position = new vec2();
 	}
 
 	/**
@@ -32,6 +35,8 @@ public abstract class Segment implements Serializable{
 
 	public Segment(String id) {
 		this.id = id;
+		rotation = 0;
+		position = new vec2(0,0);
 	}
 
 	/**
@@ -66,6 +71,33 @@ public abstract class Segment implements Serializable{
 	 */
 
 	public final String id;
+	
+	private vec2 position;
+	private double rotation;
+
+	public vec2 getPosition() {
+		return position;
+	}
+
+	public void setPosition(vec2 position) {
+		this.position = position;
+		UpdateCellPositions();
+	}
+
+	public double getRotation() {
+		return rotation;
+	}
+
+	public void setRotation(double rotation) {
+		this.rotation = rotation;
+		UpdateCellPositions();
+	}
+	
+	public void UpdateCellPositions() {
+		for (Cell cell : cells) {
+			cell.setGlobalPosition(vec2.sum( cell.getLocalPosition().rotatedCopy(rotation), position));
+		}
+	}
 
 	/**
 	 * This method compares the given string id with the segments string id and
@@ -153,5 +185,9 @@ public abstract class Segment implements Serializable{
 		System.out.print("\t path10");
 		path10.print();
 	};
+	
+	public UIsegment getUIssegment() {
+		return new UIsegment(this);
+	}
 	
 }

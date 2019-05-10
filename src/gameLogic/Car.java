@@ -22,14 +22,17 @@ public abstract class Car implements Serializable{
 	/**
 	 * Constructor that sets the starting cell for the car.
 	 */
-	public Car(Cell cell) {
+	public Car(Cell cell, Cell rearCell) {
 		this.cell = cell;
+		this.rearCell = rearCell;
 	}
 
 	/**
 	 * We store this to know which cell our car is currently at.
 	 */
 	private Cell cell;
+	
+	private Cell rearCell;
 
 	/**
 	 * A path is stored which is a sequence of cells to have an idea of the train or
@@ -49,6 +52,14 @@ public abstract class Car implements Serializable{
 	 */
 	protected Car attachedCar;
 
+	public Cell getCell() {
+		return cell;
+	}
+
+	public Cell getRearCell() {
+		return rearCell;
+	}
+	
 	/**
 	 * This method makes the objects on the level think about their next step and
 	 * consequently, move or not depending on the logic that is responsible for this
@@ -65,6 +76,7 @@ public abstract class Car implements Serializable{
 				return;
 			}
 			if (!this.nextCell.IsOccupied()) {
+				this.rearCell = this.cell;
 				this.cell = this.nextCell;
 				this.nextCell = null;
 				this.path.UpdatePresence(2, cell);

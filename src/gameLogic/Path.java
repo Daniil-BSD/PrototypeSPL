@@ -79,7 +79,7 @@ public class Path implements Serializable {
 	}
 	
 	public Cell GetCellByInverseIndex(int index) {
-		int temp = cells.length - 1 -index;
+		int temp = cells.length - 1 - index;
 		if(temp < 0) throw new IllegalArgumentException();
 		return cells[temp];
 	}

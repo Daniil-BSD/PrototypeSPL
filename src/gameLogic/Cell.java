@@ -28,6 +28,20 @@ public class Cell implements Serializable{
 	 * Coordinates of the cell
 	 */
 	public final vec2 localPosition;
+	
+	public vec2 globalPosition;
+	
+	public vec2 getLocalPosition() {
+		return new vec2(localPosition);
+	}
+	
+	public vec2 getGlobalPosition() {
+		return new vec2(globalPosition);
+	}
+	
+	public void setGlobalPosition(vec2 position) {
+		this.globalPosition = position;
+	}
 
 	/**
 	 * Default constructor
@@ -42,6 +56,7 @@ public class Cell implements Serializable{
 	
 	public Cell(float X, float Y, boolean visible) {
 		localPosition = new vec2(X,Y);
+		globalPosition = new vec2(X,Y);
 		occupied = false;
 		this.visible = visible;
 	}

@@ -12,8 +12,8 @@ public class PassengerCar extends Car {
 	 * Constructor that assigns the car's current cell, and the color which will be
 	 * compared with the stations' colors to drop passengers.
 	 */
-	public PassengerCar(Cell cell, Colors color) {
-		super(cell);
+	public PassengerCar(Cell cell, Cell rearCell, Colors color) {
+		super(cell, rearCell);
 		this.color = color;
 		this.full = true;
 	}

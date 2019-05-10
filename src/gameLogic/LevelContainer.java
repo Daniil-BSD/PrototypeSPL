@@ -42,6 +42,34 @@ public abstract class LevelContainer {
 	private static GameDisplay gameDisplay = null;
 	private static InputInterpriter inputInterpriter = null;
 
+	
+	public static void CameraAction(String action) {
+		if(gameDisplay != null) {
+			switch (action) {
+			case "up":
+				gameDisplay.moveUp();
+				break;
+			case "down":
+				gameDisplay.moveDown();
+				break;
+			case "left":
+				gameDisplay.moveLeft();
+				break;
+			case "right":
+				gameDisplay.moveRight();
+				break;
+			case "in":
+				gameDisplay.zoomIn();
+				break;
+			case "out":
+				gameDisplay.zoomOut();
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
 	public static void OpenWindow() {
 		if (frame == null) {
 			System.out.println("Opening the window");
@@ -56,6 +84,12 @@ public abstract class LevelContainer {
 	public static void FullLevelRedraw() {
 		if(gameDisplay != null && level != null) {
 			gameDisplay.FullRedraw(level.segments, level.trains);
+		}
+	}
+	
+	public static void repaint() {
+		if(gameDisplay != null) {
+			gameDisplay.repaint();
 		}
 	}
 
@@ -260,7 +294,7 @@ public abstract class LevelContainer {
 	public static void StartWithoutClock() {
 		if (gameTick == null) {
 			level.Run();
-			gameTick = new GameTick(100);
+			gameTick = new GameTick(1500);
 			gameTick.active = false;
 			gameTick.start();
 		}
@@ -269,7 +303,7 @@ public abstract class LevelContainer {
 	public static void Start() {
 		if (gameTick == null) {
 			level.Run();
-			gameTick = new GameTick(100);
+			gameTick = new GameTick(1500);
 			gameTick.start();
 		}
 	}
@@ -307,6 +341,7 @@ public abstract class LevelContainer {
 			System.out.println("Failed to load the file (does not exsist)");
 			Load(new Level());
 		}
+		FullLevelRedraw();
 	}
 
 	/**
@@ -333,6 +368,7 @@ public abstract class LevelContainer {
 	public static void Load(Level level) {
 		Stop();
 		LevelContainer.level = level;
+		FullLevelRedraw();
 	}
 
 	public static void Stop() {
@@ -350,6 +386,7 @@ public abstract class LevelContainer {
 
 	public static void Tick() {
 		level.Tick();
+		repaint();
 	}
 
 	public static void printTypes() {

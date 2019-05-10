@@ -122,11 +122,11 @@ public abstract class ConsoleInterpreter {
 									colors.add(Colors.parse(command[i]));
 								}
 								if(path.length() > 2 * colors.size() + 2) {
-									Locomotive locomotive = new Locomotive(path.GetCellByInverseIndex(0));
+									Locomotive locomotive = new Locomotive(path.GetCellByInverseIndex(0), path.GetCellByInverseIndex(1));
 									locomotive.SetPath(path);
 									Car oldTemp = locomotive;
 									for(int i = 0; i < colors.size(); i++) {
-										Car loopTemp = new PassengerCar(path.GetCellByInverseIndex(2 + i * 2), colors.get(i));
+										Car loopTemp = new PassengerCar(path.GetCellByInverseIndex(2 + i * 2),path.GetCellByInverseIndex(3 + i * 2), colors.get(i));
 										loopTemp.SetPath(path);
 										oldTemp.attach(loopTemp);
 										oldTemp = loopTemp;
@@ -139,7 +139,7 @@ public abstract class ConsoleInterpreter {
 								System.out.println("The color was not specified correctly");
 							}
 						}else {
-							System.out.println("Selected segment has no respective path");
+							System.out.println("Selected segment has no such path");
 						}
 					} catch (NumberFormatException e) {
 						System.out.println("Incorrect input");
@@ -148,6 +148,22 @@ public abstract class ConsoleInterpreter {
 					System.out.println("Selected segment was not found");
 				}
 			}
+			if(command[0].equals("move") && command.length == 4) {
+				Segment segment = LevelContainer.FindSegment(command[1]);
+				if(segment != null) {
+					try {
+						segment.setPosition(new vec2(
+								Float.parseFloat(command[2]),
+								Float.parseFloat(command[3])
+								));
+					}catch( NumberFormatException e){
+						System.out.println("Poorly specified position.");
+					}
+				}else {
+					System.out.println("Selected segment was not found");
+				}
+			}
+			
 			if (command[0].equals("start") && command.length == 1 ) {
 				System.out.println("Starting the game");
 				LevelContainer.Start();
@@ -245,29 +261,31 @@ public abstract class ConsoleInterpreter {
 				}
 
 			}
-
-			if (command[0].equals("init") && command.length > 1) {
-				if (command[1].equals("level")) {
-					LevelInitializer.LevelConstructionDemoInitializer();
-					System.out.println("//Initializing Level for Level Construction Demonstration");
+			if(command[0].equals("camera") && command.length > 2) {
+				String action = "";
+				if(command[1].equals("zoom") && command[2].equals("in")) {
+					action = "in";
+					System.out.println("Zooming in");
+				}else if(command[1].equals("zoom") && command[2].equals("out")) {
+					action = "out";
+					System.out.println("Zooming out");
+				}else if(command[1].equals("move") && command[2].equals("up")) {
+					action = "up";
+					System.out.println("Moving up");
+				}else if(command[1].equals("move") && command[2].equals("down")) {
+					action = "down";
+					System.out.println("Moving down");
+				}else if(command[1].equals("move") && command[2].equals("right")) {
+					action = "right";
+					System.out.println("Moving right");
+				}else if(command[1].equals("move") && command[2].equals("left")) {
+					action = "left";
+					System.out.println("Moving left");
 				}
-				if (command[1].equals("fork")) {
-					LevelInitializer.ForkDemoInitializer();
-					System.out.println("//Initializing Level for Fork Demonstration");
-				}
-				if (command[1].equals("station")) {
-					LevelInitializer.StatonDemoInitializer();
-					System.out.println("//Initializing Level for Station Demonstration");
-				}
-				if (command[1].equals("collision")) {
-					LevelInitializer.CollisionDemoInitializer();
-					System.out.println("//Initializing Level for Collision Demonstration");
-				}
-				if (command[1].equals("tunnel")) {
-					LevelInitializer.TunnelDemoInitializer();
-					System.out.println("//Initializing Level for Tunnel Construction Demonstration");
-				}
+				LevelContainer.CameraAction(action);
 			}
+			
+			LevelContainer.repaint();
 			if (command[0].equals("quit")) {
 				System.out.println("Quitting...");
 				Main.run = false;

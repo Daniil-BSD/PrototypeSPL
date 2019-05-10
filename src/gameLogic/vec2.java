@@ -26,6 +26,11 @@ public class vec2 implements Serializable {
 		this.y = (float) Y;
 	}
 
+	public vec2(vec2 v) {
+		this.x = v.x;
+		this.y = v.y;
+	}
+
 	public static final double sqrt2 = (double) Math.sqrt(2);
 
 	public vec2 rotatedCopy(double angle) {
@@ -63,13 +68,11 @@ public class vec2 implements Serializable {
 		if (d.length() == 0) {
 			d = new vec2(0.001, 0);
 		}
-		vec2 temp = vec2.sum(d, d.rotatedCopy(Math.PI));
-		ret.addPoint(Math.round(p2.x + temp.x), Math.round(p2.x + temp.y));
-		ret.addPoint(Math.round(p2.x - temp.x), Math.round(p2.x - temp.y));
-		temp = vec2.sum(d.scaledCopy(-1), d.rotatedCopy(Math.PI));
-		ret.addPoint(Math.round(p1.x - temp.x), Math.round(p1.x - temp.y));
-		ret.addPoint(Math.round(p1.x + temp.x), Math.round(p1.x + temp.y));
-
+		vec2 d2 = d.rotatedCopy(Math.PI / 2);
+		ret.addPoint(Math.round(p2.x + d2.x + d.x), Math.round(p2.y + d2.y + d.y));
+		ret.addPoint(Math.round(p2.x - d2.x + d.x), Math.round(p2.y - d2.y + d.y));
+		ret.addPoint(Math.round(p1.x - d2.x - d.x), Math.round(p1.y - d2.y - d.y));
+		ret.addPoint(Math.round(p1.x + d2.x - d.x), Math.round(p1.y + d2.y - d.y));
 		return ret;
 	}
 

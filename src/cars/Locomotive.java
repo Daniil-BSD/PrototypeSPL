@@ -16,8 +16,8 @@ public class Locomotive extends Car {
 	 */
 	int gloIndex = 0;
 	int curIndex;
-	public Locomotive(Cell cell) {
-		super(cell);
+	public Locomotive(Cell cell, Cell rearCell) {
+		super(cell, rearCell);
 		curIndex = gloIndex;
 		gloIndex++;
 	}
