@@ -80,7 +80,7 @@ public class Fork extends Segment {
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		path20 = new Path(temp2.toArray(new Cell[temp2.size()]));
 		end0 = path10.GetEndLogic();
-
+		setImage("res/Textures/Fork.png");
 	}
 
 	/**

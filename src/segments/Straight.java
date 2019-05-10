@@ -37,6 +37,7 @@ public class Straight extends Segment {
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		end0 = path10.GetEndLogic();
 		end1 = path01.GetEndLogic();
+		setImage("res/Textures/FullStraight.png");
 	}
 
 	// Method purely for skeleton

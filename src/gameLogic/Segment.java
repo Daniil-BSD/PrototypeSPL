@@ -1,6 +1,11 @@
 package gameLogic;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.imageio.ImageIO;
 
 import cellLogic.PathEnd;
 import userInterface.UIsegment;
@@ -73,8 +78,12 @@ public abstract class Segment implements Serializable{
 	public final String id;
 	
 	private vec2 position;
+	
 	private double rotation;
 
+	private BufferedImage image;
+	
+	
 	public vec2 getPosition() {
 		return position;
 	}
@@ -188,6 +197,22 @@ public abstract class Segment implements Serializable{
 	
 	public UIsegment getUIssegment() {
 		return new UIsegment(this);
+	}
+	
+	public BufferedImage getImage() {
+		return image;
+		
+	}
+	
+	public void setImage(String path) {
+		try {
+			image = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("incorrect Image!");		
+			
+		}
+		
 	}
 	
 }
