@@ -1,12 +1,15 @@
 package gameLogic;
 
 import java.security.InvalidParameterException;
-import java.util.*;
+
+import cellLogic.PathEnd;
+import cellLogic.PathStart;
 
 /**
  * This class is responsible for choosing the path out of the fork.
  */
-class SelectorPath extends Path {
+@SuppressWarnings("serial")
+public class SelectorPath extends Path {
 
 	/**
 	 * Constructor that accepts the cells and exits and assigns them to the Selector

@@ -1,6 +1,7 @@
 package gameLogic;
 
-import java.awt.Color;
+import cars.*;
+import segments.*;
 
 /**
  * This class initializes the level for the demonstration purposes.
@@ -80,6 +81,7 @@ public abstract class LevelInitializer {
  * This class is needed to add a specific logic to the cell, which is, again,
  * needed for the demonstration purposes.
  */
+@SuppressWarnings("serial")
 class LoggerCell implements CellLogic {
 
 	/**

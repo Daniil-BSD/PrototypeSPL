@@ -2,8 +2,9 @@ package gameLogic;
 
 import java.io.Serializable;
 import java.util.*;
-
-import javax.xml.stream.events.StartDocument;
+import cars.Locomotive;
+import segments.Tunnel;
+import segments.TunnelEntrance;
 
 /**
  * This class manages the levels of the game which store cars, segments and
@@ -88,8 +89,8 @@ class Level implements Serializable {
 	 */
 	public boolean IsTunnelPossibleBetween(TunnelEntrance te1, TunnelEntrance te2) {
 		for (Tunnel tunnel : tunnels) {
-			if (te1.equals(tunnel.entrance0) && te2.equals(tunnel.entrance1)
-					|| te1.equals(tunnel.entrance1) && te2.equals(tunnel.entrance0))  {
+			if (te1.equals(tunnel.getEntrance0()) && te2.equals(tunnel.getEntrance1())
+					|| te1.equals(tunnel.getEntrance1()) && te2.equals(tunnel.getEntrance0()))  {
 				return true;
 			}
 		}
@@ -102,8 +103,8 @@ class Level implements Serializable {
 	 */
 	public Tunnel GetTunnelBetween(TunnelEntrance te1, TunnelEntrance te2) {
 		for (Tunnel tunnel : tunnels) {
-			if (te1.equals(tunnel.entrance0) && te2.equals(tunnel.entrance1)
-					|| te1.equals(tunnel.entrance1) && te2.equals(tunnel.entrance0)) {
+			if (te1.equals(tunnel.getEntrance0()) && te2.equals(tunnel.getEntrance1())
+					|| te1.equals(tunnel.getEntrance1()) && te2.equals(tunnel.getEntrance0())) {
 				return tunnel;
 			}
 		}

@@ -1,11 +1,10 @@
 package gameLogic;
-
 import java.util.List;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-
-import gameLogic.*;
 import main.Main;
+import segments.*;
+import cars.*;
 
 /**
  * This class implements the console's behavior for the user to control the game

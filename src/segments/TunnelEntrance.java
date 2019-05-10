@@ -1,13 +1,15 @@
-package gameLogic;
+package segments;
 
 import java.util.*;
+import gameLogic.*;
 
 /**
  * This class is responsible for the entrances of the tunnels. When the train
  * disappears at one end, it emerges at the other end which is implemented by
  * this class.
  */
-class TunnelEntrance extends Segment {
+@SuppressWarnings("serial")
+public class TunnelEntrance extends Segment {
 
 	/**
 	 * Default constructor

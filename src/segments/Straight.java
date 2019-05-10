@@ -1,12 +1,15 @@
-package gameLogic;
+package segments;
 
 import java.util.LinkedList;
+
+import gameLogic.*;
 
 /**
  * This class realizes the segment with straight paths i.e, without turns.
  */
 
-class Straight extends Segment {
+@SuppressWarnings("serial")
+public class Straight extends Segment {
 	
 	 /**
      * Constructor that accepts a string id.

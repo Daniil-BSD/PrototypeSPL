@@ -1,9 +1,8 @@
 package gameLogic;
 
 import java.io.Serializable;
-import java.util.*;
 
-import javax.xml.stream.events.EndDocument;
+import cellLogic.PathEnd;
 
 /**
  * This class is responsible for bigger units of space of the level than cells -

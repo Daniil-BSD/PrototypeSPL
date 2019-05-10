@@ -1,9 +1,12 @@
-package gameLogic;
+package cars;
+
+import gameLogic.*;
 
 /**
  * This class is a car that carries passengers.
  */
-class PassengerCar extends Car {
+@SuppressWarnings("serial")
+public class PassengerCar extends Car {
 
 	/**
 	 * Constructor that assigns the car's current cell, and the color which will be

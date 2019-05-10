@@ -1,13 +1,14 @@
-package gameLogic;
+package cars;
 
-import java.util.*;
+import gameLogic.*;
 
 /**
  * This class implements the locomotive's behavior. Locomotive is the engine of
  * a train, the number of locomotives corresponds to the number of the trains on
  * the level.
  */
-class Locomotive extends Car {
+@SuppressWarnings("serial")
+public class Locomotive extends Car {
 
 	/**
 	 * Constructor that calls the superclass Car's constructor which then sets the

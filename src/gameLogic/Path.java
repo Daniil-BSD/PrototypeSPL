@@ -2,13 +2,14 @@ package gameLogic;
 
 import java.io.Serializable;
 import java.security.InvalidParameterException;
-import java.util.*;
+
+import cellLogic.*;
 
 /**
  * The path is a sequence of cells along which the train moves which is
  * implemented by this class.
  */
-class Path implements Serializable {
+public class Path implements Serializable {
 
 	/**
 	 * 

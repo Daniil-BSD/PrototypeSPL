@@ -1,12 +1,11 @@
 package gameLogic;
 
 import java.io.Serializable;
-import java.util.*;
 
 /**
  * This class is responsible for the basic spacial units of the level, cells.
  */
-class Cell implements Serializable{
+public class Cell implements Serializable{
 
 	/**
 	 * 
@@ -83,6 +82,10 @@ class Cell implements Serializable{
 	 */
 	public void setOccupied(Boolean occupied) {
 		this.occupied = occupied;
+	}
+	
+	public boolean IsVisisble() {
+		return visible;
 	}
 	
 	@Override

@@ -1,12 +1,15 @@
-package gameLogic;
+package cellLogic;
 
-import java.util.*;
+import gameLogic.Car;
+import gameLogic.Cell;
+import gameLogic.CellLogic;
 
 /**
  * This class makes it so that upon reaching the end of the segment, 
  * the train always goes along another path from another segment. 
  */
-class PathEnd implements CellLogic {
+@SuppressWarnings("serial")
+public class PathEnd implements CellLogic {
 
     /**
      * Default constructor

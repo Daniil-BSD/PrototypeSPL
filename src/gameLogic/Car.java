@@ -1,10 +1,6 @@
 package gameLogic;
 
-import java.awt.print.Printable;
 import java.io.Serializable;
-import java.util.*;
-
-import javax.xml.ws.handler.LogicalHandler;
 
 /**
  * This class is responsible for the moving objects on the level, like the
@@ -147,5 +143,4 @@ public abstract class Car implements Serializable{
 	}
 	
 	public void CustomPrint(int tabs, int index) {}
-	
 }

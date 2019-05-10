@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import gameLogic.Car;
 import gameLogic.Segment;
 
+@SuppressWarnings("serial")
 public class GameDisplay extends Canvas {
 	
 	private LinkedList<UIcar> uIcars;

@@ -1,13 +1,12 @@
 package gameLogic;
 
 import java.io.Serializable;
-import java.util.*;
 
 /**
  * This interface is responsible for „decisions” or actions that must be
  * performed at certain cells.
  */
-interface CellLogic extends Serializable{
+public interface CellLogic extends Serializable{
 
 	/**
 	 * 

@@ -1,14 +1,16 @@
-package gameLogic;
+package segments;
 
 import java.util.*;
 
-import javax.sql.rowset.Joinable;
+import cellLogic.PathEnd;
+import gameLogic.*;
 
 /**
  * This class is responsible for directing the train along the different paths
  * that go out of the fork depending on the player¡¦s choice.
  */
-class Fork extends Segment {
+@SuppressWarnings("serial")
+public class Fork extends Segment {
 	/**
 	 * Constructor that creates the fork and the respective paths.
 	 */

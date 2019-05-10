@@ -1,11 +1,13 @@
-package gameLogic;
+package segments;
 
 import java.util.*;
+import gameLogic.*;
 
 /**
  * This class is responsible for the tunnels which connect the two entrances.
  */
-class Tunnel extends Segment {
+@SuppressWarnings("serial")
+public class Tunnel extends Segment {
 
 	 /**
      * This constructor assigns the entrances.
@@ -33,19 +35,19 @@ class Tunnel extends Segment {
 		end1 = path01.GetEndLogic();
 		this.entrance0 = entrance1;
 		this.entrance1 = entrance2;
-		end0.Connect(this.entrance0.GetTunnelExitPath().GetStart());
-		end1.Connect(this.entrance1.GetTunnelExitPath().GetStart());
+		end0.Connect(this.getEntrance0().GetTunnelExitPath().GetStart());
+		end1.Connect(this.getEntrance1().GetTunnelExitPath().GetStart());
 	}
 
 	/**
 	 * This attribute stores one entrance of the tunnel.
 	 */
-	protected TunnelEntrance entrance0;
+	private TunnelEntrance entrance0;
 
 	/**
 	 * This attribute stores another entrance of the tunnel.
 	 */
-	protected TunnelEntrance entrance1;
+	private TunnelEntrance entrance1;
 	/**
 	 * This attribute stores the length of a tunnel.
 	 */
@@ -56,20 +58,20 @@ class Tunnel extends Segment {
 	 */
 	
 	public TunnelEntrance GetTheOtherEnd(TunnelEntrance te) {
-		if (te == entrance0) {
-			return entrance1;
+		if (te == getEntrance0()) {
+			return getEntrance1();
 		}
-		if (te == entrance1) {
-			return entrance0;
+		if (te == getEntrance1()) {
+			return getEntrance0();
 		}
 		return null;
 	}
 	
 	public Cell PathStartFor(TunnelEntrance te) {
-		if (te == entrance0) {
+		if (te == getEntrance0()) {
 			return path01.GetStart();
 		}
-		if (te == entrance1) {
+		if (te == getEntrance1()) {
 			return path10.GetStart();
 		}
 		return null;
@@ -87,6 +89,17 @@ class Tunnel extends Segment {
 		path10.print();
 	}
 
-	
+	/**
+	 * @return the entrance0
+	 */
+	public TunnelEntrance getEntrance0() {
+		return entrance0;
+	}
 
+	/**
+	 * @return the entrance1
+	 */
+	public TunnelEntrance getEntrance1() {
+		return entrance1;
+	}
 }

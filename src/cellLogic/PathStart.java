@@ -1,11 +1,14 @@
-package gameLogic;
+package cellLogic;
 
-import java.util.*;
+import gameLogic.Car;
+import gameLogic.CellLogic;
+import gameLogic.Path;
 
 /**
  * This class is needed to set the paths for the trains.
  */
-class PathStart implements CellLogic {
+@SuppressWarnings("serial")
+public class PathStart implements CellLogic {
 
     /**
      * Copy constructor

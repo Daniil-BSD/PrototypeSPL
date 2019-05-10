@@ -1,6 +1,5 @@
 package gameLogic;
 
-import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,19 +7,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.*;
 
-import javax.print.attribute.PrintJobAttributeSet;
-
-import userInterface.GameDisplay;
-import userInterface.MainFrame;
+import cars.*;
+import segments.*;
+import userInterface.*;
 
 /**
  * This class stores all the levels of the game. Also, the levels are managed
  * internally by this class. The segments are joined and the tunnels are
  * constructed by it.
  */
-abstract class LevelContainer {
+public abstract class LevelContainer {
 
 	/**
 	 * This attribute stores the active level.

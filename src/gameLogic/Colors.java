@@ -16,7 +16,22 @@ public enum Colors {
 			return Green;
 		case "blue":
 			return Blue;
+		default:
+			return Black;
 		}
-		return Black;
+	}
+	
+	public Color getAwtColor() {
+		switch (this) {
+		case Red:
+			return Color.RED;
+		case Green:
+			return Color.GREEN;
+		case Blue:
+			return Color.BLUE;
+		case Black:
+			return Color.BLACK;
+		}
+		return Color.BLACK;
 	}
 }

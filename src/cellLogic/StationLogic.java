@@ -1,10 +1,17 @@
-package gameLogic;
+package cellLogic;
+
+import gameLogic.Car;
+import gameLogic.CellLogic;
+import gameLogic.Colors;
+import gameLogic.LevelContainer;
+import segments.Station;
 
 /**
  * This class implements the logic of passengers embarking and
  *  disembarking depending on the colors of the train and the station. 
  */
-class StationLogic implements CellLogic {
+@SuppressWarnings("serial")
+public class StationLogic implements CellLogic {
 	
 	/**
 	 * This attribute stores the boolean flag to identify the FinalStation.

@@ -1,12 +1,16 @@
-package gameLogic;
+package segments;
 
 import java.util.*;
+
+import cellLogic.StationLogic;
+import gameLogic.*;
 
 /**
  * This class is responsible for the stations that have color. Depending on
  * these colors, passengers embark or disembark.
  */
-class Station extends Segment {
+@SuppressWarnings("serial")
+public class Station extends Segment {
 
 	/**
 	 * Default constructor
