@@ -81,6 +81,8 @@ public abstract class LevelContainer {
 			frame.addActionEventListenerToButtons(inputInterpriter);
 			frame.addKeyListener(inputInterpriter);
 			gameDisplay = frame.getGameDisplay();
+			gameDisplay.addMouseListener(inputInterpriter);
+			inputInterpriter.setGameDisplay(gameDisplay);
 		}
 	}
 	
@@ -327,6 +329,12 @@ public abstract class LevelContainer {
 	public static void Pause() {
 		if (gameTick != null) {
 			gameTick.active = false;
+		}
+	}
+	
+	public static void SelectByPoint(vec2 point) {
+		if(level != null) {
+			level.SelectByPoint(point);
 		}
 	}
 

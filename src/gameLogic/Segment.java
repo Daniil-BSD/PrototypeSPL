@@ -196,5 +196,11 @@ public abstract class Segment implements Serializable{
 	
 	public abstract String getTexturePath();
 	public abstract vec2 getSize();
-	
+	public void SelelectCallAt(vec2 point) {
+		vec2 halfsize = getSize().scaledCopy(0.5);
+		vec2 relative = vec2.differance(point, position.rotatedCopy(rotation * (Math.PI / 2)));
+		if(relative.x <= halfsize.x && relative.x >= -halfsize.x && relative.y <= halfsize.y && relative.y >= -halfsize.y ) {
+			Select();
+		}
+	}
 }

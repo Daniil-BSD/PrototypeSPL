@@ -67,6 +67,9 @@ public class GameDisplay extends Canvas {
 	public vec2 GetScreenPosition( vec2 globalPosition) {
 		return vec2.sum(vec2.sum(globalPosition, offset).scaledCopy(scale), origin);
 	}
+	public vec2 GetWorldPosition( vec2 screenPosition) {
+		return vec2.differance(vec2.differance(screenPosition, origin).scaledCopy(1 / scale), offset);
+	}
 
 	public vec2 updateOrigin() {
 		return origin = new vec2(this.getWidth() / 2f, this.getHeight() / 2f);
