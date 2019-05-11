@@ -126,7 +126,32 @@ public class Station extends Segment {
 
 	@Override
 	public String getTexturePath() {
-		return "res/Textures/Station.png";
+		if(colors.length<=1 && colors[0].equals(Colors.valueOf("Red"))) {
+			
+			return "res/Textures/StationRed.png";
+		}
+		if(colors.length<=1 && colors[0].equals(Colors.valueOf("Green"))) {
+			
+			return "res/Textures/StationGreen.png";
+		}
+		if(colors.length<=1 && colors[0].equals(Colors.valueOf("Blue"))) {
+			
+			return "res/Textures/StationBlue.png";
+		}
+		if(colors.length<=2 && (colors[0].equals(Colors.valueOf("Red"))&&colors[1].equals(Colors.valueOf("Green"))||colors[0].equals(Colors.valueOf("Green"))&&colors[1].equals(Colors.valueOf("Red")))) {
+			
+			return "res/Textures/StationRedGreen.png";
+		}
+		if(colors.length<=2 && (colors[0].equals(Colors.valueOf("Red"))&&colors[1].equals(Colors.valueOf("Blue"))||colors[0].equals(Colors.valueOf("Blue"))&&colors[1].equals(Colors.valueOf("Red")))) {
+			
+			return "res/Textures/StationRedBlue.png";
+		}
+		if(colors.length<=2 && (colors[0].equals(Colors.valueOf("Green"))&&colors[1].equals(Colors.valueOf("Blue"))||colors[0].equals(Colors.valueOf("Blue"))&&colors[1].equals(Colors.valueOf("Green")))) {
+			
+			return "res/Textures/StationGreenBlue.png";
+		}
+		
+		return "res/Textures/StationRGB.png";
 	}
 
 	@Override

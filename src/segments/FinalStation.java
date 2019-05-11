@@ -38,4 +38,10 @@ public class FinalStation extends Station {
 	public boolean IsFinal() {
 		return true;
 	}
+	
+	public String getTexturePath() {
+		
+		
+		return "res/Textures/StationFinal.png";
+	}
 }

@@ -110,7 +110,7 @@ public class TunnelEntrance extends Segment {
 
 	@Override
 	public String getTexturePath() {
-		return "NONE";
+		return "res/Textures/TunnelEntrance.png";
 	}
 
 	@Override
