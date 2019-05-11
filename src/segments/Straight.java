@@ -49,4 +49,9 @@ public class Straight extends Segment {
 	public String getTexturePath() {
 		return "res/Textures/FullStraight.png";
 	}
+
+	@Override
+	public vec2 getSize() {
+		return new vec2(7, 7);
+	}
 }

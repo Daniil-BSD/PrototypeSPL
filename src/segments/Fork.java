@@ -198,4 +198,8 @@ public class Fork extends Segment {
 		return "res/Textures/Fork.png";
 	}
 
+	@Override
+	public vec2 getSize() {
+		return new vec2(7, 7);
+	}
 }

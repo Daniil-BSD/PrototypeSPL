@@ -1,5 +1,7 @@
 package cars;
 
+import java.awt.Color;
+
 import gameLogic.*;
 
 /**
@@ -38,6 +40,11 @@ public class PassengerCar extends Car {
 	@Override
 	public boolean IsEmpty() {
 		return super.IsEmpty() && !full;
+	}
+	
+	@Override
+	public Color getColor() {
+		return (full)?color.getAwtColor():new Color(0.6f, 0.6f, 0.6f);
 	}
 	/**
 	 * This method compares the colors of the station with the train's colors if the

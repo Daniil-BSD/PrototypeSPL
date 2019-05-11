@@ -1,5 +1,6 @@
 package gameLogic;
 
+import java.awt.Color;
 import java.io.Serializable;
 
 /**
@@ -140,6 +141,10 @@ public abstract class Car implements Serializable{
 			return attachedCar.IsEmpty();
 		}
 		return true;
+	}
+	
+	public Color getColor() {
+		return new Color(0.8f, 0.6f, 0.4f);
 	}
 	
 	public void printFull(int tabs, int index) {

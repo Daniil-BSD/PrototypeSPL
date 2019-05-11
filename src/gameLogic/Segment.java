@@ -195,5 +195,6 @@ public abstract class Segment implements Serializable{
 	}
 	
 	public abstract String getTexturePath();
+	public abstract vec2 getSize();
 	
 }

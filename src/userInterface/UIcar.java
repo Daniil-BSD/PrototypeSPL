@@ -3,7 +3,6 @@ package userInterface;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
-import java.util.Random;
 
 import gameLogic.*;
 
@@ -14,6 +13,7 @@ public class UIcar {
 	private final Car car;
 	private Polygon polygon;
 	private boolean draw = false;
+	private Color color;
 	
 	public UIcar(Car car) {
 		this.car = car;
@@ -27,13 +27,13 @@ public class UIcar {
 			vec2 p1 = gameDisplay.GetScreenPosition(c1.getGlobalPosition());
 			vec2 p2 = gameDisplay.GetScreenPosition(c2.getGlobalPosition());
 			polygon = vec2.getPolygon(WIDTH * gameDisplay.getScale(), p1, p2);
+			color = car.getColor();
 		}
 	}
 	
 	public void paint (Graphics g, GameDisplay gameDisplay) {
 		if(draw) {
-			Random random = new Random();
-			g.setColor(new Color(random.nextFloat(), random.nextFloat(), random.nextFloat()));
+			g.setColor(color);
 			g.fillPolygon(polygon);
 		}
 	}

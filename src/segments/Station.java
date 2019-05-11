@@ -29,12 +29,12 @@ public class Station extends Segment {
 		cells = new Cell[18];
 		LinkedList<Cell> temp = new LinkedList<Cell>();
 		for (int i = 0; i <= 13; i++) {
-			cells[i] = new Cell(0,3-i);
+			cells[i] = new Cell(0,6.5f-i);
 		}
-		cells[14] = new Cell(0, -10);
-		cells[15] = new Cell(0, -8);
-		cells[16] = new Cell(0, 1);
-		cells[17] = new Cell(0, 3);
+		cells[14] = new Cell(0, -6.5f);
+		cells[15] = new Cell(0, -2.5f);
+		cells[16] = new Cell(0, 2.5f);
+		cells[17] = new Cell(0, 6.5f);
 		for (int i = 0; i < 14; i++) {
 			temp.add(cells[i]);
 		}
@@ -127,5 +127,10 @@ public class Station extends Segment {
 	@Override
 	public String getTexturePath() {
 		return "res/Textures/Station.png";
+	}
+
+	@Override
+	public vec2 getSize() {
+		return new vec2(14, 14);
 	}
 }

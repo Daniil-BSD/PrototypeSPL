@@ -107,4 +107,9 @@ public class Tunnel extends Segment {
 	public String getTexturePath() {
 		return "NONE";
 	}
+
+	@Override
+	public vec2 getSize() {
+		return new vec2(7, 7);
+	}
 }
