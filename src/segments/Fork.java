@@ -21,25 +21,23 @@ public class Fork extends Segment {
 		LinkedList<Cell> temp = new LinkedList<Cell>();
 		LinkedList<Cell> temp2 = new LinkedList<Cell>();
 		
-		
-		//for (int i = 0; i < 17; i++) {		}
-		cells[0] = new Cell(0,4); 
-		cells[1] = new Cell(0,3); 
-		cells[2] = new Cell(-1,2); 
-		cells[3] = new Cell(1,2); 
-		cells[4] = new Cell(-2,1);
-		cells[5] = new Cell(-3,0);
-		cells[6] = new Cell(-4,0);
-		cells[7] = new Cell(2,1);
-		cells[8] = new Cell(3,0);
-		cells[9] = new Cell(4,0);
-		cells[10] = new Cell(-4,0);
-		cells[11] = new Cell(-2,1); 
-		cells[12] = new Cell(-1,2);
-		cells[13] = new Cell(4,0);
-		cells[14] = new Cell(2,1);
-		cells[15] = new Cell(1,2);
-		cells[16] = new Cell(0,4);
+		cells[0 ] = new Cell(0,3); 
+		cells[1 ] = new Cell(0,2); 
+		cells[2 ] = new Cell(0.5f,1); 
+		cells[3 ] = new Cell(-0.5f,1); 
+		cells[4 ] = new Cell(1,0.5f);
+		cells[5 ] = new Cell(2,0);
+		cells[6 ] = new Cell(3,0);
+		cells[7 ] = new Cell(-1,0.5f);
+		cells[8 ] = new Cell(-2,0);
+		cells[9 ] = new Cell(-3,0);
+		cells[10] = new Cell(3,0);
+		cells[11] = new Cell(1,0.5f); 
+		cells[12] = new Cell(0.5f,1); 
+		cells[13] = new Cell(-3,0);
+		cells[14] = new Cell(-1,0.5f);
+		cells[15] = new Cell(-0.5f,1); 
+		cells[16] = new Cell(0,3); 
 		
 		int i = 0;
 		for (; i < 2; i++) {
@@ -80,7 +78,6 @@ public class Fork extends Segment {
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		path20 = new Path(temp2.toArray(new Cell[temp2.size()]));
 		end0 = path10.GetEndLogic();
-		setImage("res/Textures/Fork.png");
 	}
 
 	/**
@@ -185,22 +182,6 @@ public class Fork extends Segment {
 			end2.Connect(end);
 	}
 
-	// Method purely for skeleton
-	/**
-	 * 
-	 * 
-	 * this method returns a cell where a locomotive should be placed for
-	 * demonstraton
-	 */
-	public Cell GET_DEMO_CELL(int index) {
-		index %= 3;
-		if (index == 1)
-			return cells[5];
-		if (index == 2)
-			return cells[8];
-		return cells[0];
-	}
-
 	public void printFull() {
 		System.out.println("Fork \"" + id + "\"");
 		super.printFull();
@@ -212,7 +193,9 @@ public class Fork extends Segment {
 		path20.print();
 	}
 
-	
-	
+	@Override
+	public String getTexturePath() {
+		return "res/Textures/Fork.png";
+	}
 
 }

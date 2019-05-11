@@ -37,35 +37,6 @@ public class Straight extends Segment {
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		end0 = path10.GetEndLogic();
 		end1 = path01.GetEndLogic();
-		setImage("res/Textures/FullStraight.png");
-	}
-
-	// Method purely for skeleton
-	/**
-	 * 
-	 * 
-	 * this method returns a cell where a locomotive should be placed for
-	 * demonstraton
-	 */
-	public Cell GET_DEMO_CELL(int index) {
-		index %= 2;
-		if (index == 1)
-			return cells[3];
-		return cells[6];
-	}
-	
-	// Method purely for skeleton
-	/**
-	 * 
-	 * 
-	 * this method returns a cell where a locomotive should be placed for
-	 * demonstraton
-	 */
-	public Path GET_DEMO_PATHL(int index) {
-		index %= 2;
-		if (index == 1)
-			return path01;
-		return path10;
 	}
 	
 	public void printFull() {
@@ -73,5 +44,9 @@ public class Straight extends Segment {
 		super.printFull();
 	}
 
-	
+
+	@Override
+	public String getTexturePath() {
+		return "res/Textures/FullStraight.png";
+	}
 }

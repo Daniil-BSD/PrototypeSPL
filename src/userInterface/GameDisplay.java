@@ -36,26 +36,32 @@ public class GameDisplay extends Canvas {
 
 	public void zoomIn() {
 		scale *= 1.25f;
+		Update();
 	}
 
 	public void zoomOut() {
 		scale *= 0.8f;
+		Update();
 	}
 
 	public void moveUp() {
 		offset.y -= 5;
+		Update();
 	}
 
 	public void moveDown() {
 		offset.y += 5;
+		Update();
 	}
 
 	public void moveLeft() {
 		offset.x -= 5;
+		Update();
 	}
 
 	public void moveRight() {
 		offset.x += 5;
+		Update();
 	}
 	
 	public vec2 GetScreenPosition( vec2 globalPosition) {
@@ -72,9 +78,18 @@ public class GameDisplay extends Canvas {
 		scale = 50;
 		offset = new vec2();
 	}
+	
+	public void Update() {
+		updateOrigin();
+		for (UIsegment uIsegment : uIsegments) {
+			uIsegment.calculate(this);
+		}for (UIcar uIcar : uIcars) {
+			uIcar.calculate(this);
+		}
+		repaint();
+	}
 
 	public void paint(Graphics g) {
-		updateOrigin();
 		setBackground(Color.WHITE);
 		setForeground(Color.BLACK);
 		for (UIsegment uIsegment : uIsegments) {
@@ -93,6 +108,7 @@ public class GameDisplay extends Canvas {
 		for (Segment segment : segments) {
 			AddSegment(segment);
 		}
+		Update();
 	}
 
 	public void AddCar(Car car) {

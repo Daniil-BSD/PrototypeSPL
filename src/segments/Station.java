@@ -122,4 +122,10 @@ public class Station extends Segment {
 		System.out.println();
 		super.printFull();
 	}
+
+
+	@Override
+	public String getTexturePath() {
+		return "res/Textures/Station.png";
+	}
 }

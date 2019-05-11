@@ -1,12 +1,5 @@
 package gameLogic;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-
-import javax.imageio.ImageIO;
-
 import cellLogic.PathEnd;
 import userInterface.UIsegment;
 
@@ -79,9 +72,7 @@ public abstract class Segment implements Serializable{
 	
 	private vec2 position;
 	
-	private double rotation;
-
-	private BufferedImage image;
+	private int rotation;
 	
 	
 	public vec2 getPosition() {
@@ -93,18 +84,18 @@ public abstract class Segment implements Serializable{
 		UpdateCellPositions();
 	}
 
-	public double getRotation() {
+	public int getRotation() {
 		return rotation;
 	}
 
-	public void setRotation(double rotation) {
+	public void setRotation(int rotation) {
 		this.rotation = rotation;
 		UpdateCellPositions();
 	}
 	
 	public void UpdateCellPositions() {
 		for (Cell cell : cells) {
-			cell.setGlobalPosition(vec2.sum( cell.getLocalPosition().rotatedCopy(rotation), position));
+			cell.setGlobalPosition(vec2.sum( cell.getLocalPosition().rotatedCopy(rotation * Math.PI / 2), position));
 		}
 	}
 
@@ -199,20 +190,10 @@ public abstract class Segment implements Serializable{
 		return new UIsegment(this);
 	}
 	
-	public BufferedImage getImage() {
-		return image;
-		
+	public Multitexture getTexture() {
+		return Multitexture.getTexture(getTexturePath());
 	}
 	
-	public void setImage(String path) {
-		try {
-			image = ImageIO.read(new File(path));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("incorrect Image!!");		
-			
-		}
-		
-	}
+	public abstract String getTexturePath();
 	
 }

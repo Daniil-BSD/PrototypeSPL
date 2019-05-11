@@ -6,6 +6,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.Panel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 public class MainFrame {
 
@@ -84,6 +85,10 @@ public class MainFrame {
 		for(JMenuItem mItem : menuItems) {
 			mItem.addActionListener(actionListener);
 		}
+	}
+	
+	public void addKeyListener(KeyListener keyListener) {
+		frame.addKeyListener(keyListener);
 	}
 
 }

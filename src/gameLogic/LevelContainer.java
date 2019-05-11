@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 import cars.*;
 import segments.*;
 import userInterface.*;
@@ -36,7 +39,7 @@ public abstract class LevelContainer {
 	private static TunnelEntrance selected;
 
 	public static final String PERSISTANCE_PATH = "C:\\Users\\Public\\";
-	public static final String FILE_EXTENSION = ".lvl";
+	public static final String FILE_EXTENSION = "lvl";
 
 	private static MainFrame frame = null;
 	private static GameDisplay gameDisplay = null;
@@ -76,6 +79,7 @@ public abstract class LevelContainer {
 			frame = new MainFrame();
 			inputInterpriter = new InputInterpriter();
 			frame.addActionEventListenerToButtons(inputInterpriter);
+			frame.addKeyListener(inputInterpriter);
 			gameDisplay = frame.getGameDisplay();
 		}
 	}
@@ -89,7 +93,7 @@ public abstract class LevelContainer {
 	
 	public static void repaint() {
 		if(gameDisplay != null) {
-			gameDisplay.repaint();
+			gameDisplay.Update();
 		}
 	}
 
@@ -265,6 +269,9 @@ public abstract class LevelContainer {
 
 	public static void Victory() {
 		System.out.println("Victory!");
+		JOptionPane jOptionPane = new JOptionPane("You have Won!", JOptionPane.INFORMATION_MESSAGE);
+		JDialog jDialog = jOptionPane.createDialog("Victory");
+		jDialog.setVisible(true);
 		Stop();
 	}
 
@@ -283,6 +290,9 @@ public abstract class LevelContainer {
 		} else {
 			System.out.println("The game is lost!");
 		}
+		JOptionPane jOptionPane = new JOptionPane("You have lost the game!", JOptionPane.INFORMATION_MESSAGE);
+		JDialog jDialog = jOptionPane.createDialog("Defeeat");
+		jDialog.setVisible(true);
 		Stop();
 	}
 
@@ -323,12 +333,19 @@ public abstract class LevelContainer {
 	/**
 	 * This method is loads the level to the level container.
 	 */
+	
 	public static void Load(String name) {
 		File file = new File(PERSISTANCE_PATH + name + FILE_EXTENSION);
+		Load(file);
+	}
+	
+	public static void Load(File file) {
+		Stop();
 		if (file.isFile() && file.getName().endsWith(FILE_EXTENSION) && file.exists()) {
 			try {
 				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 				level = (Level) ois.readObject();
+				selected = null;
 				ois.close();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -337,11 +354,11 @@ public abstract class LevelContainer {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
+			FullLevelRedraw();
 		} else {
 			System.out.println("Failed to load the file (does not exsist)");
 			Load(new Level());
 		}
-		FullLevelRedraw();
 	}
 
 	/**
@@ -349,6 +366,10 @@ public abstract class LevelContainer {
 	 */
 	public static void Save(String name) {
 		File file = new File(PERSISTANCE_PATH + name + FILE_EXTENSION);
+		Save(file);
+	}
+	
+	public static void Save(File file) {
 		if (file.exists() && file.isFile() && file.getName().endsWith(FILE_EXTENSION) || !file.exists()) {
 			try {
 				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
@@ -368,6 +389,7 @@ public abstract class LevelContainer {
 	public static void Load(Level level) {
 		Stop();
 		LevelContainer.level = level;
+		selected = null;
 		FullLevelRedraw();
 	}
 
@@ -377,7 +399,6 @@ public abstract class LevelContainer {
 			try {
 				gameTick.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			gameTick = null;

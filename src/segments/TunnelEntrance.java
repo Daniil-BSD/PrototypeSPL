@@ -108,5 +108,9 @@ public class TunnelEntrance extends Segment {
 		super.printFull();
 	}
 
+	@Override
+	public String getTexturePath() {
+		return "NONE";
+	}
 	
 }

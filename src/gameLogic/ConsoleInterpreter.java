@@ -156,8 +156,22 @@ public abstract class ConsoleInterpreter {
 								Float.parseFloat(command[2]),
 								Float.parseFloat(command[3])
 								));
+						System.out.println(segment.id + " moved to (" + command[2] + " , " + command[3] + ")");
 					}catch( NumberFormatException e){
 						System.out.println("Poorly specified position.");
+					}
+				}else {
+					System.out.println("Selected segment was not found");
+				}
+			}
+			if(command[0].equals("rotate") && command.length == 3) {
+				Segment segment = LevelContainer.FindSegment(command[1]);
+				if(segment != null) {
+					try {
+						segment.setRotation(Integer.parseInt(command[2]));
+						System.out.println(segment.id + " rotated " + (Integer.parseInt(command[2]) * 90) + " degrees)");
+					}catch( NumberFormatException e){
+						System.out.println("Poorly specified angle.");
 					}
 				}else {
 					System.out.println("Selected segment was not found");

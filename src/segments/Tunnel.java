@@ -102,4 +102,9 @@ public class Tunnel extends Segment {
 	public TunnelEntrance getEntrance1() {
 		return entrance1;
 	}
+
+	@Override
+	public String getTexturePath() {
+		return "NONE";
+	}
 }
