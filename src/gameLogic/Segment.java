@@ -209,7 +209,7 @@ public abstract class Segment implements Serializable{
 			image = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("incorrect Image!");		
+			System.out.println("incorrect Image!!");		
 			
 		}
 		
