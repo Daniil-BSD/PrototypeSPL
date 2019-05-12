@@ -13,6 +13,7 @@ public class GameDisplay extends Canvas {
 
 	private LinkedList<UIcar> uIcars;
 	private LinkedList<UIsegment> uIsegments;
+	private static final Color background = new Color(102, 157, 49);
 
 	private float scale;
 	private vec2 origin;
@@ -93,7 +94,7 @@ public class GameDisplay extends Canvas {
 	}
 
 	public void paint(Graphics g) {
-		setBackground(Color.WHITE);
+		setBackground(background);
 		setForeground(Color.BLACK);
 		for (UIsegment uIsegment : uIsegments) {
 			uIsegment.paint(g, this);

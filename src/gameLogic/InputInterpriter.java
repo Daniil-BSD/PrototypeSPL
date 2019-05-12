@@ -16,6 +16,7 @@ public class InputInterpriter implements ActionListener, KeyListener, MouseListe
 		if(gameDisplay != null && arg0.getButton() == MouseEvent.BUTTON1) {
 			vec2 click = new vec2(arg0.getX(), arg0.getY());
 			LevelContainer.SelectByPoint(gameDisplay.GetWorldPosition(click));
+			LevelContainer.repaint();
 		}
 	}
 

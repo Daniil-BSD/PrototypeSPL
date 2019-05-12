@@ -87,6 +87,10 @@ public class SelectorPath extends Path {
 		return exits[selectedIndex];
 	}
 
+	public int GetSelectedIndex() {
+		return selectedIndex;
+	}
+	
 	/**
      * This method returns the PathEnd logic of the exit matched with the given integer index.
      */

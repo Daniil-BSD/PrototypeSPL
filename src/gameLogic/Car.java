@@ -2,7 +2,6 @@ package gameLogic;
 
 import java.awt.Color;
 import java.io.Serializable;
-
 /**
  * This class is responsible for the moving objects on the level, like the
  * locomotive and the passenger car which are derived from this class.
@@ -52,6 +51,8 @@ public abstract class Car implements Serializable{
 	 * with each other for this to work.
 	 */
 	protected Car attachedCar;
+	
+	public static final Color DEFAULT_COLOR = new Color(0.8f, 0.6f, 0);
 
 	public Cell getCell() {
 		return cell;
@@ -144,7 +145,7 @@ public abstract class Car implements Serializable{
 	}
 	
 	public Color getColor() {
-		return new Color(0.8f, 0.6f, 0.4f);
+		return DEFAULT_COLOR;
 	}
 	
 	public void printFull(int tabs, int index) {

@@ -129,7 +129,6 @@ public class Fork extends Segment {
 	public void Select() {
 		if (IsEmpty()) {
 			selectorPath.SelectNextExit();
-
 		}
 	}
 
@@ -195,8 +194,10 @@ public class Fork extends Segment {
 
 	@Override
 	public String getTexturePath() {
-		
-		return "res/Textures/Fork.png";
+		if (selectorPath.GetSelectedIndex() == 0) {
+			return "res/Textures/ForkRight.png";
+		}
+		return "res/Textures/ForkLeft.png";
 	}
 
 	@Override
