@@ -8,16 +8,46 @@ import java.awt.Panel;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
-public class MainFrame {
+//This class is implements the main frame of the program where 
+//the drawing will take place. Also, some configuration elements 
+//will be present on the frame. Attributes and methods are inherited
+//from the parent class. The LevelContainer class will also have 
+//the MainFrame-type attribute for it to interact with the frame.
 
+public class MainFrame {
+	/**
+	 * This attribute stores the JFrame object 
+	 * as the base to draw objects on it.
+	 */
 	private JFrame frame;
+	/**
+	 * This attribute is needed for the configuration elements.
+	 */
 	private JMenuBar menuBar;
+	/**
+	 * This menu will contain options tied to the Game.
+	 */
 	private JMenu mnGame;
+	/**
+	 * This menu will contain the file options like save, load.
+	 */
 	private JMenu mnFile;
+	/**
+	 * This array contains menu elements.
+	 */
 	private JMenuItem[] menuItems;
+	/**
+	 * This attribute stores the panel on which the objects will 
+	 * be grouped.
+	 */
 	private Panel CanvasPannel;
+	/**
+	 * This attribute will display the level.
+	 */
 	private GameDisplay gameDisplay;
-	
+	/**
+	 * this method returns the current GameDisplay.
+	 */
 	public GameDisplay getGameDisplay() {
 		return gameDisplay;
 	}
@@ -31,7 +61,8 @@ public class MainFrame {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * The initialization process will be handled by this method, that is, 
+	 * initializes the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -80,13 +111,19 @@ public class MainFrame {
 		gameDisplay = new GameDisplay();
 		CanvasPannel.add(gameDisplay);
 	}
-	
+	/**
+	 * this method assigns an ActionEventListener to buttons so that
+	 *  when the button is pressed, some process will start.
+	 */
 	public void addActionEventListenerToButtons(ActionListener actionListener) {
 		for(JMenuItem mItem : menuItems) {
 			mItem.addActionListener(actionListener);
 		}
 	}
-	
+	/**
+	 * this method assigns a KeyListener to keys so that when a key 
+	 * is pressed, some process will start.
+	 */
 	public void addKeyListener(KeyListener keyListener) {
 		frame.addKeyListener(keyListener);
 	}

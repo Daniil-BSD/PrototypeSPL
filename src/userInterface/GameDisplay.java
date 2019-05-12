@@ -7,11 +7,19 @@ import java.util.LinkedList;
 import gameLogic.Car;
 import gameLogic.Segment;
 import gameLogic.vec2;
-
+/**
+ * This class is responsible for drawing the level 
+ * and all the objects inside it. 
+ */
 @SuppressWarnings("serial")
 public class GameDisplay extends Canvas {
-
+	/**
+	 * This list stores the ui elements that draw cars.
+	 */
 	private LinkedList<UIcar> uIcars;
+	/**
+	 * This list stores all the UI elements that draw segments.
+	 */
 	private LinkedList<UIsegment> uIsegments;
 	private static final Color background = new Color(102, 157, 49);
 
@@ -34,7 +42,9 @@ public class GameDisplay extends Canvas {
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
-
+	/**
+	 * Camera actions.
+	 */
 	public void zoomIn() {
 		scale *= 1.25f;
 		Update();
@@ -64,10 +74,15 @@ public class GameDisplay extends Canvas {
 		offset.x += 5;
 		Update();
 	}
-	
+	/**
+	 * Gets position of the vec2 relative to the screen.
+	 */
 	public vec2 GetScreenPosition( vec2 globalPosition) {
 		return vec2.sum(vec2.sum(globalPosition, offset).scaledCopy(scale), origin);
 	}
+	/**
+	 * Gets position of the vec2 relative to the global coordinates.
+	 */
 	public vec2 GetWorldPosition( vec2 screenPosition) {
 		return vec2.difference(vec2.difference(screenPosition, origin).scaledCopy(1 / scale), offset);
 	}
@@ -82,7 +97,9 @@ public class GameDisplay extends Canvas {
 		scale = 50;
 		offset = new vec2();
 	}
-	
+	/**
+	 * Updates components in the display.
+	 */
 	public void Update() {
 		updateOrigin();
 		for (UIsegment uIsegment : uIsegments) {
@@ -92,7 +109,10 @@ public class GameDisplay extends Canvas {
 		}
 		repaint();
 	}
-
+	/**
+	 * This method draws an empty canvas,
+	 *  ready for other objects to be drawn.
+	 */
 	public void paint(Graphics g) {
 		setBackground(background);
 		setForeground(Color.BLACK);
@@ -102,7 +122,10 @@ public class GameDisplay extends Canvas {
 			uIcar.paint(g, this);
 		}
 	}
-
+	/**
+	 * This method deletes the current list elements and populates them with new objects, 
+	 * given as parameters in the form of arraylists.	
+	 */
 	public void FullRedraw(ArrayList<? extends Segment> segments, ArrayList<? extends Car> trains) {
 		uIcars = new LinkedList<UIcar>();
 		uIsegments = new LinkedList<UIsegment>();
@@ -114,13 +137,19 @@ public class GameDisplay extends Canvas {
 		}
 		Update();
 	}
-
+	/**
+	 * This method adds a new UICar element with the car 
+	 * given as  the constructor parameter.
+	 */
 	public void AddCar(Car car) {
 		uIcars.add(new UIcar(car));
 		if (car.getAttachedCar() != null)
 			this.AddCar(car.getAttachedCar());
 	}
-
+	/**
+	 *  This method adds a new UISegment element with the 
+	 *  segment given as  the constructor parameter.
+	 */
 	public void AddSegment(Segment segment) {
 		uIsegments.add(new UIsegment(segment));
 	}

@@ -6,7 +6,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import userInterface.GameDisplay;
-
+//This class listens to the input events like mouse 
+//clicks and does respective actions.
 public class InputInterpreter implements ActionListener, KeyListener, MouseListener {
 	
 	private GameDisplay gameDisplay;
@@ -35,7 +36,11 @@ public class InputInterpreter implements ActionListener, KeyListener, MouseListe
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 	}
-
+	/**
+	 * An action that is performed when a key is pressed. 
+	 * This public method and the one below are derived from 
+	 * the KeyListener interface.
+	 */
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		switch (arg0.getKeyCode()) {
@@ -58,7 +63,9 @@ public class InputInterpreter implements ActionListener, KeyListener, MouseListe
 			LevelContainer.CameraAction("out");
 		}
 	}
-
+	/**
+	 * An action that is performed when a key is released.
+	 */
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 	}
@@ -66,7 +73,11 @@ public class InputInterpreter implements ActionListener, KeyListener, MouseListe
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 	}
-
+	/**
+	 *  This public method from the ActionEventListener interface 
+	 *  is overridden to do certain actions based on the event it 
+	 *  got as a parameter.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		switch (arg0.getActionCommand()) {
