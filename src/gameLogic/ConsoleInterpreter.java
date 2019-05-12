@@ -47,6 +47,10 @@ public abstract class ConsoleInterpreter {
 						System.out.println("Adding a straight...");
 						newSegment = new Straight(command[2]);
 						LevelContainer.addSegment(newSegment);
+					} else if (command[1].equals("turn")) {
+						System.out.println("Adding a turn...");
+						newSegment = new Turn(command[2]);
+						LevelContainer.addSegment(newSegment);
 					} else if (command[1].equals("entrance")) {
 						System.out.println("Adding a tunnel entrance...");
 						newSegment = new TunnelEntrance(command[2]);
