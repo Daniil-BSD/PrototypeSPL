@@ -40,12 +40,24 @@ public abstract class LevelContainer {
 
 	public static final String PERSISTANCE_PATH = "C:\\Users\\Public\\";
 	public static final String FILE_EXTENSION = "lvl";
-
+	/**
+	 * Stores the current frame of the level. 
+	 */
 	private static MainFrame frame = null;
+	/**
+	 * Stores the element of the GameDisplay class which extends the canvas class.
+	 * Will be used to display the level of the game.
+	 */
 	private static GameDisplay gameDisplay = null;
-	private static InputInterpriter inputInterpriter = null;
+	/**
+	 * Attribute that stores the inputinterpreter 
+	 * which will take actions upon receiving input signals.
+	 */
+	private static InputInterpreter inputInterpreter = null;
 
-	
+	/**
+	 * 	Performs the camera movement passed as string
+	 */
 	public static void CameraAction(String action) {
 		if(gameDisplay != null) {
 			switch (action) {
@@ -72,27 +84,37 @@ public abstract class LevelContainer {
 			}
 		}
 	}
-	
+	/**
+	*Creates a new window(creates an Input Interpreter, a frame,
+	* a GameDisplay and puts them together.)
+	*/
 	public static void OpenWindow() {
 		if (frame == null) {
 			System.out.println("Opening the window");
 			frame = new MainFrame();
-			inputInterpriter = new InputInterpriter();
-			frame.addActionEventListenerToButtons(inputInterpriter);
-			frame.addKeyListener(inputInterpriter);
+			inputInterpreter = new InputInterpreter();
+			frame.addActionEventListenerToButtons(inputInterpreter);
+			frame.addKeyListener(inputInterpreter);
 			gameDisplay = frame.getGameDisplay();
-			gameDisplay.addMouseListener(inputInterpriter);
-			inputInterpriter.setGameDisplay(gameDisplay);
+			gameDisplay.addMouseListener(inputInterpreter);
+			inputInterpreter.setGameDisplay(gameDisplay);
 		}
 	}
 	
-	
+	/**
+	 * This method will remove all the UI elements from the level and
+	 *  draw the new ones in case the new level is loaded or UI is no 
+	 *  longer consistent with the level(it will call the FullRedraw 
+	 *  method of the GameDisplay class).
+	 */
 	public static void FullLevelRedraw() {
 		if(gameDisplay != null && level != null) {
 			gameDisplay.FullRedraw(level.segments, level.trains);
 		}
 	}
-	
+	/**
+	 * Updates the gameDisplay.
+	 */
 	public static void repaint() {
 		if(gameDisplay != null) {
 			gameDisplay.Update();
@@ -202,7 +224,8 @@ public abstract class LevelContainer {
 	}
 
 	/**
-	 * This method registers a new segment to the level.
+	 * This method registers a new segment to the level and
+	 * will also add a UISegment to the gameDisplay.
 	 */
 	public static void addSegment(Segment sgm) {
 		level.addSegment(sgm);
@@ -211,7 +234,8 @@ public abstract class LevelContainer {
 	}
 
 	/**
-	 * This method registers a new locomotive to the level.
+	 * This method registers a new locomotive to the level and
+	 * will also add a UICar to the gameDisplay.
 	 */
 	public static void addLocomotive(Locomotive locomotive) {
 		level.addLcomotive(locomotive);
@@ -302,7 +326,6 @@ public abstract class LevelContainer {
 	 * This method starts the game on the current level, while also starting the
 	 * clock.
 	 */
-
 	public static void StartWithoutClock() {
 		if (gameTick == null) {
 			level.Run();
@@ -339,7 +362,7 @@ public abstract class LevelContainer {
 	}
 
 	/**
-	 * This method is loads the level to the level container.
+	 * This method loads the level to the level container.
 	 */
 	
 	public static void Load(String name) {

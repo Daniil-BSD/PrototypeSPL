@@ -16,7 +16,9 @@ public class Cell implements Serializable{
 	 * This attribute stores true if the cell is occupied by a car, false otherwise.
 	 */
 	private boolean occupied;
-	
+	/**
+	 * This attribute stores true if the cell is currently visible, false otherwise.
+	 */
 	private boolean visible;
 
 	/**
@@ -25,20 +27,30 @@ public class Cell implements Serializable{
 	private CellLogic logic;
 	
 	/**
-	 * Coordinates of the cell
+	 * Stores coordinates of the cell
 	 */
 	public final vec2 localPosition;
-	
+	/**
+	 * Stores the position in respect to the level.
+	 */
 	public vec2 globalPosition;
 	
+	/**
+	 * Returns the localPosition.
+	 */
 	public vec2 getLocalPosition() {
 		return new vec2(localPosition);
 	}
-	
+	/**
+	 * Returns the globalPosition.
+	 */
 	public vec2 getGlobalPosition() {
 		return new vec2(globalPosition);
 	}
 	
+	/**
+	 * Sets the globalPosition.
+	 */
 	public void setGlobalPosition(vec2 position) {
 		this.globalPosition = position;
 	}
@@ -60,7 +72,8 @@ public class Cell implements Serializable{
 		occupied = false;
 		this.visible = visible;
 	}
-
+	/**
+	 */
 	public boolean LogicRequest(Car car) {
 		if (logic != null) {
 			Boolean messageBool = logic.LogicRequest(car);
@@ -98,7 +111,9 @@ public class Cell implements Serializable{
 	public void setOccupied(Boolean occupied) {
 		this.occupied = occupied;
 	}
-	
+	/**
+	 * This method sets the visible value of the cell.
+	 */
 	public boolean IsVisisble() {
 		return visible;
 	}

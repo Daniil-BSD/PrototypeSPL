@@ -1,4 +1,5 @@
 package gameLogic;
+
 import java.io.Serializable;
 import cellLogic.PathEnd;
 import userInterface.UIsegment;
@@ -11,7 +12,7 @@ import userInterface.UIsegment;
  * that, a segment is a sequence of cells along two paths in opposite directions
  * for the trains to traverse.
  */
-public abstract class Segment implements Serializable{
+public abstract class Segment implements Serializable {
 
 	/**
 	 * 
@@ -34,7 +35,7 @@ public abstract class Segment implements Serializable{
 	public Segment(String id) {
 		this.id = id;
 		rotation = 0;
-		position = new vec2(0,0);
+		position = new vec2(0, 0);
 	}
 
 	/**
@@ -69,40 +70,58 @@ public abstract class Segment implements Serializable{
 	 */
 
 	public final String id;
-	
+	/**
+	 * This attribute stores the position in respect to the level.
+	 */
 	private vec2 position;
-	
+
+	/**
+	 * This attribute will dictate the segment’s orientation on the level when
+	 * drawn.
+	 */
 	private int rotation;
-	
-	
+
+	/**
+	 * Returns the globalPosition.
+	 */
 	public vec2 getPosition() {
 		return position;
 	}
 
+	/**
+	 * Setter for the globalPosition.
+	 */
 	public void setPosition(vec2 position) {
 		this.position = position;
 		UpdateCellPositions();
 	}
 
+	/**
+	 * Getter for the rotation.
+	 */
 	public int getRotation() {
 		return rotation;
 	}
 
+	/**
+	 * Setter for the rotation.
+	 */
 	public void setRotation(int rotation) {
 		this.rotation = rotation;
 		UpdateCellPositions();
 	}
-	
+	/**
+	 * Updates the global positions of the cells of the segment.
+	 */
 	public void UpdateCellPositions() {
 		for (Cell cell : cells) {
-			cell.setGlobalPosition(vec2.sum( cell.getLocalPosition().rotatedCopy(rotation * Math.PI / 2), position));
+			cell.setGlobalPosition(vec2.sum(cell.getLocalPosition().rotatedCopy(rotation * Math.PI / 2), position));
 		}
 	}
 
 	/**
-	 * This method compares the given string id with the segments string id and
+	 * This method compares the given string id with the segment's string id and
 	 * returns true if they match. False otherwise.
-	 * 
 	 */
 	public boolean AreYou(String segmentID) {
 		return id.equals(segmentID);
@@ -111,7 +130,6 @@ public abstract class Segment implements Serializable{
 	/**
 	 * This method compares the given segment with the current segment and returns
 	 * true if they match. False otherwise.
-	 * 
 	 */
 	public boolean AreYou(Segment segment) {
 		return this == segment;
@@ -164,10 +182,12 @@ public abstract class Segment implements Serializable{
 	 * This method is needed to store the segment which was selected by the player
 	 * to construct a tunnel, or to control a switch at the chosen fork.
 	 */
-	public void Select() {}
+	public void Select() {
+	}
 
 	/**
-	 * This method gets the path that ends with the cell identified by the given integer id.
+	 * This method gets the path that ends with the cell identified by the given
+	 * integer id.
 	 */
 	public Path GetPathEndingWith(int endID) {
 
@@ -179,27 +199,48 @@ public abstract class Segment implements Serializable{
 
 	}
 
+	/**
+	 * Method prints the cells of the segment in the console for demonstration
+	 * purposes.
+	 */
 	public void printFull() {
 		System.out.print("\t path01");
 		path01.print();
 		System.out.print("\t path10");
 		path10.print();
 	};
-	
+
+	/**
+	 * Getter for the UI representation of the segment
+	 */
 	public UIsegment getUIssegment() {
 		return new UIsegment(this);
 	}
-	
+
+	/**
+	 * Method returns the texture.
+	 */
 	public Multitexture getTexture() {
 		return Multitexture.getTexture(getTexturePath());
 	}
-	
+
+	/**
+	 * Gets the path of the texture for the segment. Abstract because only concrete
+	 * segments can have texture.
+	 */
 	public abstract String getTexturePath();
+	/**
+	 * Method returns the size of the segment.
+	 */
 	public abstract vec2 getSize();
-	public void SelelectCallAt(vec2 point) {
+	/**
+	 * Select method at a single point.
+	 */
+	public void selectCallAt(vec2 point) {
 		vec2 halfsize = getSize().scaledCopy(0.5);
-		vec2 relative = vec2.differance(point, position.rotatedCopy(rotation * (Math.PI / 2)));
-		if(relative.x <= halfsize.x && relative.x >= -halfsize.x && relative.y <= halfsize.y && relative.y >= -halfsize.y ) {
+		vec2 relative = vec2.difference(point, position.rotatedCopy(rotation * (Math.PI / 2)));
+		if (relative.x <= halfsize.x && relative.x >= -halfsize.x && relative.y <= halfsize.y
+				&& relative.y >= -halfsize.y) {
 			Select();
 		}
 	}

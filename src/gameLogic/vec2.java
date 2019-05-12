@@ -8,7 +8,8 @@ import java.io.Serializable;
 
 public class vec2 implements Serializable {
 	private static final long serialVersionUID = 6640145731289519931L;
-	
+	 
+	// float values that represent the x and y coordinates
 	public float x;
 	public float y;
 
@@ -32,39 +33,57 @@ public class vec2 implements Serializable {
 	}
 
 	public static final double sqrt2 = (double) Math.sqrt(2);
-
+	
+	/**
+	 * Returns a vec2 rotated a given angle.
+	 */
 	public vec2 rotatedCopy(double angle) {
 		return new vec2(x * Math.cos(angle) - y * Math.sin(angle), 
 						x * Math.sin(angle) + y * Math.cos(angle));
 	}
-
+	/**
+	 * Returns a normalized copy of the vec2.
+	 */
 	public vec2 normalizedCopy() {
 		return scaledCopy(1 / length());
 	}
-
+	/**
+	 * Returns a normalized and scaled copy of the vec2.
+	 */
 	public vec2 scaledNormalizedCopy(double scale) {
 		return scaledCopy(scale / length());
 	}
-
+	/**
+	 * Returns the length of the vec2.
+	 */
 	public double length() {
 		return Math.sqrt(x * x + y * y);
 	}
-
+	/**
+	 * Returns the scaled copy of the vec2.
+	 */
 	public vec2 scaledCopy(double scale) {
 		return new vec2(x * scale, y * scale);
 	}
-
+	/**
+	 * Adds two vec2 together.
+	 */
 	public static vec2 sum(vec2 a, vec2 b) {
 		return new vec2(a.x + b.x, a.y + b.y);
 	}
-
-	public static vec2 differance(vec2 a, vec2 b) {
+	/**
+	 * Takes the difference between two vec2 .
+	 */
+	public static vec2 difference(vec2 a, vec2 b) {
 		return new vec2(a.x - b.x, a.y - b.y);
 	}
-
+	/**
+	 * This method returns a polygon that is formed from the points
+	 * and the float width value passed as parameters.
+	 */
 	public static Polygon getPolygon(float width, vec2 p1, vec2 p2) {
 		Polygon ret = new Polygon();
-		vec2 d = vec2.differance(p2, p1).scaledNormalizedCopy(width / 2);
+		vec2 d = vec2.difference(p2, p1).scaledNormalizedCopy(width / 2);
 		if (d.length() == 0) {
 			d = new vec2(0.001, 0);
 		}
@@ -75,19 +94,22 @@ public class vec2 implements Serializable {
 		ret.addPoint(Math.round(p1.x + d2.x - d.x), Math.round(p1.y + d2.y - d.y));
 		return ret;
 	}
-
+	/**
+	 * this method returns a set of points that forms the polygon 
+	 * from the width and points passed as parameters to this method.
+	 */
 	public static vec2[] getPolygonPoints(float width, vec2 p1, vec2 p2) {
 		vec2[] v = new vec2[4];
-		vec2 d = vec2.differance(p2, p1).scaledNormalizedCopy(width / 2);
+		vec2 d = vec2.difference(p2, p1).scaledNormalizedCopy(width / 2);
 		if (d.length() == 0) {
 			d = new vec2(0.001, 0);
 		}
 		vec2 temp = vec2.sum(d, d.rotatedCopy(Math.PI));
 		v[0] = vec2.sum(p2 , temp);
-		v[1] = vec2.differance(p2 , temp);
+		v[1] = vec2.difference(p2 , temp);
 		temp = vec2.sum(d.scaledCopy(-1), d.rotatedCopy(Math.PI));
 		v[2] = vec2.sum(p1 , temp);
-		v[3] = vec2.differance(p1 , temp);
+		v[3] = vec2.difference(p1 , temp);
 		return v;
 	}
 

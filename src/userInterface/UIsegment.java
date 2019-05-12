@@ -16,9 +16,9 @@ public class UIsegment {
 	
 	public void  calculate( GameDisplay gameDisplay) {
 		vec2 v = segment.getSize().scaledCopy(0.5);
-		p = gameDisplay.GetScreenPosition(vec2.differance(segment.getPosition(), v));
+		p = gameDisplay.GetScreenPosition(vec2.difference(segment.getPosition(), v));
 		s = gameDisplay.GetScreenPosition(vec2.sum(segment.getPosition(), v));
-		s = vec2.differance(s, p);
+		s = vec2.difference(s, p);
 		ready = true;
 	}
 	

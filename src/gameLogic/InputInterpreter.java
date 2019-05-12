@@ -7,7 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import userInterface.GameDisplay;
 
-public class InputInterpriter implements ActionListener, KeyListener, MouseListener {
+public class InputInterpreter implements ActionListener, KeyListener, MouseListener {
 	
 	private GameDisplay gameDisplay;
 

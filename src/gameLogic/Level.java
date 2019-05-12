@@ -146,7 +146,7 @@ class Level implements Serializable {
 
 	public void SelectByPoint(vec2 point) {
 		for (Segment segment : segments) {
-			segment.SelelectCallAt(point);
+			segment.selectCallAt(point);
 		}
 	}
 
