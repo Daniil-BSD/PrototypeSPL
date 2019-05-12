@@ -6,8 +6,11 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import userInterface.GameDisplay;
-//This class listens to the input events like mouse 
-//clicks and does respective actions.
+/**
+ * This class listens to the input events like mouse 
+ * clicks and does respective actions.
+ */
+
 public class InputInterpreter implements ActionListener, KeyListener, MouseListener {
 	
 	private GameDisplay gameDisplay;

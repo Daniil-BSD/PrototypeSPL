@@ -22,7 +22,7 @@ public class PassengerCar extends Car {
 
 	/**
 	 * This attribute stores the color of the car for it to drop the passengers if
-	 * it matches the station¡¦s color.
+	 * it matches the station's color.
 	 */
 	private Colors color;
 

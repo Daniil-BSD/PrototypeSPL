@@ -12,7 +12,7 @@ public class Locomotive extends Car {
 
 	/**
 	 * Constructor that calls the superclass Car's constructor which then sets the
-	 * given cell as the one that the locomotive is currently at.
+	 * given cell as the one where the locomotive is currently at.
 	 */
 	int gloIndex = 0;
 	int curIndex;
@@ -23,7 +23,8 @@ public class Locomotive extends Car {
 	}
 	
 	/**
-	 * This method checks if this car is a locomotive. Always returns true.
+	 * When the locomotive is at the station, this method gets the 
+	 * colors of the attached cars. 
 	 */
 	@Override
 	public boolean CurrentlyAtTheStation_Locomotive(Colors[] colors) {

@@ -119,7 +119,7 @@ public abstract class Car implements Serializable{
 
 	/**
 	 * When the locomotive is at the station, this method gets the colors of the
-	 * train, checks if any of them match with the station¡¦s colors. If they do, it
+	 * train, checks if any of them match with the station's colors. If they do, it
 	 * then drops the passengers.
 	 */
 	public boolean CurrentlyAtTheStation_Universal(Colors[] colors) {
