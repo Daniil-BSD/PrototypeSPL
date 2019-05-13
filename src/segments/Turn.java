@@ -25,10 +25,7 @@ public class Turn  extends Segment {
 		cells[5] = new Cell(3,0);
 		cells[6] = new Cell(3,0);
 		cells[7] = new Cell(0,3);
-		int j=3;
 		for (int i = 0; i < 6; i++) {
-			cells[i] = new Cell(0,j);
-			j--;
 			temp.add(cells[i]);
 		}
 		path01 = new Path(temp.toArray(new Cell[temp.size()]));
@@ -37,7 +34,7 @@ public class Turn  extends Segment {
 		for (int i = 4; i > 0; i--) {
 			temp.add(cells[i]);
 		}
-		temp.add(cells[87]);
+		temp.add(cells[7]);
 		path10 = new Path(temp.toArray(new Cell[temp.size()]));
 		end0 = path10.GetEndLogic();
 		end1 = path01.GetEndLogic();

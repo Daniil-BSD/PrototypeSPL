@@ -115,7 +115,7 @@ public abstract class Segment implements Serializable {
 	 */
 	public void UpdateCellPositions() {
 		for (Cell cell : cells) {
-			cell.setGlobalPosition(vec2.sum(cell.getLocalPosition().rotatedCopy(rotation * Math.PI / 2), position));
+			cell.setGlobalPosition(vec2.sum(cell.getLocalPosition().rotatedCopy(-rotation * Math.PI / 2), position));
 		}
 	}
 
