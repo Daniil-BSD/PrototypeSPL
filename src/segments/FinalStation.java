@@ -40,8 +40,33 @@ public class FinalStation extends Station {
 	}
 	
 	public String getTexturePath() {
+		Colors[] colors = getColors();
 		
+		if(colors.length<=1 && colors[0].equals(Colors.valueOf("Red"))) {
+			
+			return "res/Textures/StationFinalRed.png";
+		}
+		if(colors.length<=1 && colors[0].equals(Colors.valueOf("Green"))) {
+			
+			return "res/Textures/StationFinalGreen.png";
+		}
+		if(colors.length<=1 && colors[0].equals(Colors.valueOf("Blue"))) {
+			
+			return "res/Textures/StationFinalBlue.png";
+		}
+		if(colors.length<=2 && (colors[0].equals(Colors.valueOf("Red"))&&colors[1].equals(Colors.valueOf("Green"))||colors[0].equals(Colors.valueOf("Green"))&&colors[1].equals(Colors.valueOf("Red")))) {
+			
+			return "res/Textures/StationFinalRedGreen.png";
+		}
+		if(colors.length<=2 && (colors[0].equals(Colors.valueOf("Red"))&&colors[1].equals(Colors.valueOf("Blue"))||colors[0].equals(Colors.valueOf("Blue"))&&colors[1].equals(Colors.valueOf("Red")))) {
+			
+			return "res/Textures/StationFinalRedBlue.png";
+		}
+		if(colors.length<=2 && (colors[0].equals(Colors.valueOf("Green"))&&colors[1].equals(Colors.valueOf("Blue"))||colors[0].equals(Colors.valueOf("Blue"))&&colors[1].equals(Colors.valueOf("Green")))) {
+			
+			return "res/Textures/StationFinalGreenBlue.png";
+		}
 		
-		return "res/Textures/StationFinal.png";
+		return "res/Textures/StationFinalRGB.png";
 	}
 }
