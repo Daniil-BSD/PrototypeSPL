@@ -58,7 +58,9 @@ class Level implements Serializable {
 
 	public void Tick() {
 		if(gameActive) {
-			for (Locomotive locomotive : activeTrains) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Locomotive> activeTrainsClone = (ArrayList<Locomotive>) activeTrains.clone();
+			for (Locomotive locomotive : activeTrainsClone) {
 				locomotive.Step();
 			}
 		}

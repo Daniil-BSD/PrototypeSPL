@@ -251,17 +251,17 @@ public abstract class Segment implements Serializable {
 		vec2 relative = vec2.difference(point, position);
 		if (
 			(	
-			rotation % 2 == 0 &&
+			(rotation + 1000) % 2 == 0 &&
 			relative.x <= halfsize.x &&
 			relative.x >= -halfsize.x &&
 			relative.y <= halfsize.y &&
 			relative.y >= -halfsize.y
 			) || (
-			rotation % 2 == 1 &&
-			relative.x <= halfsize.y &&
-			relative.x >= -halfsize.y &&
+			(rotation + 1000) % 2 == 1 &&
 			relative.y <= halfsize.x &&
-			relative.y >= -halfsize.x	
+			relative.y >= -halfsize.x &&
+			relative.x <= halfsize.y &&
+			relative.x >= -halfsize.y	
 			)) {
 			Select();
 		}

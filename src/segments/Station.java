@@ -32,8 +32,8 @@ public class Station extends Segment {
 			cells[i] = new Cell(0,6.5f-i);
 		}
 		cells[14] = new Cell(0, -6.5f);
-		cells[15] = new Cell(0, -2.5f);
-		cells[16] = new Cell(0, 2.5f);
+		cells[15] = new Cell(0, -4.5f);
+		cells[16] = new Cell(0, 4.5f);
 		cells[17] = new Cell(0, 6.5f);
 		for (int i = 0; i < 14; i++) {
 			temp.add(cells[i]);
