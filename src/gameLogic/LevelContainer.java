@@ -207,6 +207,9 @@ public abstract class LevelContainer {
 	public static void ConstructFrom(TunnelEntrance te) {
 		if (!level.gameActive) {
 			System.out.println("Tunnel Constructed");
+			JOptionPane jOptionPane = new JOptionPane("Tunnel Constructed", JOptionPane.INFORMATION_MESSAGE);
+			JDialog jDialog = jOptionPane.createDialog("Notification");
+			jDialog.setVisible(true);
 			te.FullClear();
 			selected.FullClear();
 			Tunnel newTunnel = LevelContainer.level.GetTunnelBetween(te, selected);

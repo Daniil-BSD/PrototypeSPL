@@ -248,9 +248,21 @@ public abstract class Segment implements Serializable {
 	 */
 	public void selectCallAt(vec2 point) {
 		vec2 halfsize = getSize().scaledCopy(0.5);
-		vec2 relative = vec2.difference(point, position.rotatedCopy(rotation * (Math.PI / 2)));
-		if (relative.x <= halfsize.x && relative.x >= -halfsize.x && relative.y <= halfsize.y
-				&& relative.y >= -halfsize.y) {
+		vec2 relative = vec2.difference(point, position);
+		if (
+			(	
+			rotation % 2 == 0 &&
+			relative.x <= halfsize.x &&
+			relative.x >= -halfsize.x &&
+			relative.y <= halfsize.y &&
+			relative.y >= -halfsize.y
+			) || (
+			rotation % 2 == 1 &&
+			relative.x <= halfsize.y &&
+			relative.x >= -halfsize.y &&
+			relative.y <= halfsize.x &&
+			relative.y >= -halfsize.x	
+			)) {
 			Select();
 		}
 	}

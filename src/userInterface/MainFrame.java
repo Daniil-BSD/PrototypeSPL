@@ -126,6 +126,7 @@ public class MainFrame {
 	 */
 	public void addKeyListener(KeyListener keyListener) {
 		frame.addKeyListener(keyListener);
+		gameDisplay.addKeyListener(keyListener);
 	}
 
 }
