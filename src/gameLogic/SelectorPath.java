@@ -77,6 +77,45 @@ public class SelectorPath extends Path {
 	public Cell GetEndByIndex(int index) {
 		return exits[index % exits.length];
 	}
+	
+
+
+	/**
+	 * This method gets the cell, which is occupied by a car and makes the amount of
+	 * cells equal to length behind the car occupied as well.
+	 */
+	public void UpdatePresence(int length, Cell current) {
+		int index = 0;
+		boolean found = false;
+		for (index = 0; index < cells.length; index++) {
+			if (cells[index] == current) {
+				found = true;
+				break;
+			}
+		}
+		if (found) {
+			int i = 0;
+			for (; i < length && index - i >= 0; i++) {
+				cells[index - i].setOccupied(true);
+			}
+			if (i == length && index - i >= 0) {
+				cells[index - i].setOccupied(false);
+			}
+		}else {
+			found = false;
+			for (index = 0; index < cells.length; index++) {
+				if (exits[index] == current) {
+					found = true;
+					break;
+				}
+			}
+			if(found) {
+				for (int i = 1; i < length + 1  && cells.length - i >= 0; i++) {
+					cells[cells.length - i].setOccupied(false);
+				}
+			}
+		}
+	}
 
 	
 	/**

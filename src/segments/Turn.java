@@ -7,6 +7,7 @@ import gameLogic.Path;
 import gameLogic.Segment;
 import gameLogic.vec2;
 
+@SuppressWarnings("serial")
 public class Turn  extends Segment {
 	
 	 /**

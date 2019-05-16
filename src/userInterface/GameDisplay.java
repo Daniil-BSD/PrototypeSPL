@@ -24,8 +24,8 @@ public class GameDisplay extends Canvas {
 	private static final Color background = new Color(102, 157, 49);
 
 	private float scale;
-	private vec2 origin;
-	private vec2 offset;
+	private vec2 origin = new vec2(0.0f,0.0f);
+	private vec2 offset = new vec2(0.0f,0.0f);
 
 	public vec2 getOffset() {
 		return offset;

@@ -329,7 +329,7 @@ public abstract class LevelContainer {
 	public static void StartWithoutClock() {
 		if (gameTick == null) {
 			level.Run();
-			gameTick = new GameTick(1500);
+			gameTick = new GameTick(1000);
 			gameTick.active = false;
 			gameTick.start();
 		}
@@ -338,7 +338,7 @@ public abstract class LevelContainer {
 	public static void Start() {
 		if (gameTick == null) {
 			level.Run();
-			gameTick = new GameTick(1500);
+			gameTick = new GameTick(1000);
 			gameTick.start();
 		}
 	}
@@ -428,7 +428,7 @@ public abstract class LevelContainer {
 		if (gameTick != null) {
 			gameTick.run = false;
 			try {
-				gameTick.join();
+				gameTick.join(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

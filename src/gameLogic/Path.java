@@ -94,7 +94,7 @@ public class Path implements Serializable {
 	 */
 	public void UpdatePresence(int length, Cell current) {
 		int index = 0;
-;		boolean found = false;
+		boolean found = false;
 		for (index = 0; index < cells.length; index++) {
 			if (cells[index] == current) {
 				found = true;

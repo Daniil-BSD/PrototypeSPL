@@ -97,19 +97,6 @@ public class Fork extends Segment {
 	private Path path02;
 
 	private PathEnd end2;
-
-	/**
-	 * This method returns true or false respectively if the cell out of the fork is
-	 * occupied by a car or not
-	 */
-	public boolean IsEmpty() {
-		for (Cell cell : this.cells) {
-			if (cell.IsOccupied()) {
-				return false;
-			}
-		}
-		return true;
-	}
 	
 	@Override
 	public Path GetPathEndingWith (int endID) {

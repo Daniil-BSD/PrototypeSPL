@@ -184,6 +184,16 @@ public abstract class Segment implements Serializable {
 	 */
 	public void Select() {
 	}
+	
+	
+	public boolean IsEmpty() {
+		for (Cell cell : this.cells) {
+			if (cell.IsOccupied()) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * This method gets the path that ends with the cell identified by the given
